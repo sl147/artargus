@@ -1,0 +1,116 @@
+select {
+  height:30px;
+  line-height:30px;
+  background:#f4f4f4;
+} 
+
+ input {
+  width: 95%;
+  height: 30px;
+  font-size: 14px;
+ }
+
+.argusImg {
+  width: 100%;
+ height: auto;
+}
+ .auth {
+   background-color: #F5FFFA;
+   border: 1px solid black;
+   padding: 10px;
+   opacity:0.8;
+   border-radius: 20px;
+   font-size: 15px;
+   margin-top: 5%;
+ }
+
+ .auth select  {
+  width: 99%;
+  padding-left: 5px;
+ }
+
+.reklPicture {
+  margin-top: 36%;
+  height: auto;
+}
+
+.pinfo {
+  height: 15px;
+}
+.var {
+  font-family:'Verdana', Geneva, sans-serif ;
+  font-size: 25px;
+  color: blue;
+  font-weight:bold;
+}
+.bgFull {
+    position:fixed;
+    z-index: -1;
+    top:0;
+    left:0; 
+    min-width:100%;
+    min-height:100%;
+}
+ .str-main{
+/*background-image: url("../image/1.jpg");*/
+background-attachment: fixed;
+background-size: cover;
+height: 100%;
+width: 100%;
+}
+.cont-main {
+overflow: hidden;
+margin: 0 auto;
+width: 1100px;
+border-radius: 10px;
+padding-top:1px;
+padding-bottom:12px;
+}
+
+.authmaker {
+   width: 60em;
+   height: 94em;
+   margin: 0 auto;
+   border-radius: 20px;
+ }
+
+.authmaker label  {
+  display: block;
+  width: 150px;
+  float: left;
+ }
+
+#formCom {
+  background-color: #C3E2F4;
+  border: 1px solid black;
+  padding: 10px;
+  opacity:0.85;
+  border-radius: 20px;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 5px;
+ }
+  #formCom label {
+  display: block;
+  width:11em;
+  float: left;
+ }
+ #formCom textarea {
+  width:100%;
+ }
+#formCom input  {
+  width: 100%;  
+ }
+ .news_Comment{
+background-color:#DCEEE9; 
+color: #8B87E3;
+font-size: 12px;
+padding: 10px;
+border-radius: 10px;
+margin: 0 auto;
+}
+.dnister{ 
+  color: #8B87E3;
+  font-size: 14px;
+  padding: 10px;
+}

@@ -1,0 +1,168 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  .menuMain {
+    visibility: visible;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 1024px) {
+.saturate {
+width: 160px;
+height: 160px;
+}
+
+.text-menu { 
+font-size: 10px;
+}
+
+ .findInput {
+ font-size: 10px;
+width: 76%;
+ }
+
+.groupLeft {
+font-size: 10px;
+text-transform: lowercase;
+}
+
+.menuMain {
+  visibility: visible;
+}
+}
+@media only screen and (max-width : 992px) {
+  .groupLeft {
+  font-size: 8px;
+  }
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+body{
+  background-image:none ;
+}
+.textwidth {
+  font-size: 14px;
+}
+
+.hamburgerAdmin{
+ visibility: visible;
+ z-index: 100;
+}
+.hamburgerMenu {
+  visibility: visible;
+  font-size: 16px;
+}
+.menuMain {
+  visibility: hidden;
+}
+.news {
+width: 670px;
+margin-left: 25px;
+}
+.leftSide {
+display: none;
+}
+footer {
+display: none;
+}
+}
+
+@media only screen and (max-width : 736px) {
+
+}
+
+@media only screen and (max-width : 667px) {
+  .news {
+    width: 500px;
+    margin-left: 55px;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+.news {
+width: 440px;
+margin-left: 55px;
+}
+
+}
+
+@media only screen and (max-width : 568px) {
+.textwidth {
+  font-size: 20px;
+}
+.news {
+width: 400px;
+}
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+.textwidth {
+  font-size: 25px;
+}
+
+}
+
+@media only screen and (max-width : 414px) {
+.textwidth {
+  font-size: 30px;
+}
+
+.news {
+width: 345px;
+margin-left: 15px;
+}
+}
+
+@media only screen and (max-width : 384px) {
+
+}
+
+@media only screen and (max-width : 375px) {
+.news {
+width: 305px;
+}
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+.news {
+width: 262px;
+margin-left: 10px;
+}
+}
+@media only screen and (max-width : 240px) {
+
+}
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .text-menu {
+    font-size:13px;
+  }
+}

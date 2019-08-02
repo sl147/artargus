@@ -1,0 +1,373 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+.menuMain {
+  visibility: visible;
+}
+.color_box{
+width:60px;
+height:60px;
+}
+.fototov {
+width:100%;
+height: auto;
+}
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 1024px) {
+.saturate {
+width: 160px;
+height: 160px;
+}
+.btn-menu { 
+width: 650px;
+margin-left: -8px;
+}
+
+.text-menu { 
+font-size: 10px;
+}
+
+ .findInput {
+ font-size: 10px;
+width: 76%;
+ }
+
+.groupLeft {
+font-size: 10px;
+text-transform: lowercase;
+}
+.btnwidth {
+  font-size: 11px;
+}
+#authlog {
+  font-size: 11px;
+  width: 35%;
+}
+.findDiv {
+width: 60%;
+}
+.menuMain {
+  visibility: visible;
+}
+}
+@media only screen and (max-width : 992px) {
+.fotolist {
+  width: 90%;
+  height: auto;
+}
+.helo{
+	display: none;
+}
+.findDiv {
+width: 60%;
+}
+
+.leftSide {
+  font-size: 10px;
+}
+.groupLeft {
+font-size: 8px;
+}
+.fototov {
+width:49%;
+height: auto;
+}
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	 body{
+background-image:none ;
+}
+.textwidth {
+  font-size: 14px;
+}
+.fototov {
+width:60%;
+height: auto;
+}
+.flexPrice {
+  order: 1;
+}
+.flexTXT {
+  order: 2;
+}
+/*.flexCont {
+  flex-wrap: wrap-reverse;
+}*/
+.flexTXT {
+  flex-grow: 1;
+}
+.nameGroup {
+padding-top: 0px;
+padding-bottom: 5px;
+}
+
+.hamburgerAdmin{
+ visibility: visible;
+ z-index: 100;
+}
+.hamburgerMenu {
+  visibility: visible;
+  font-size: 16px;
+}
+.menuMain {
+  visibility: hidden;
+}
+.news {
+width: 670px;
+margin-left: 25px;
+}
+
+footer {
+display: none;
+}
+
+.findDiv {
+display: none;
+}
+.findbox {
+display: none;
+}
+
+ #orderform legend {
+  	font-size: 11px;
+  }
+
+ .btn-menu { 
+width: 484px;
+margin-left: 36px;
+}
+#authlog {
+   padding-top: 40px;
+   width: 40%;
+ }
+
+.leftSide {
+display: none;
+}
+.itemtxt {
+height: 46px;
+}
+
+}
+
+@media only screen and (max-width : 736px) {
+
+#authlog {
+   width: 50%;
+ }
+}
+
+@media only screen and (max-width : 667px) {
+
+.news {
+width: 500px;
+margin-left: 55px;
+}
+ .btn-menu { 
+width: 484px;
+margin-left: 3px;
+}
+.logdiv {
+ margin-left: 2px; 
+}
+
+}
+
+@media only screen and (max-width : 600px) {
+.fototov {
+width:60%;
+height: auto;
+}
+#auth3 legend {
+  font-size: 18px;
+}
+ #auth3 input {
+  width: 100%;
+ }
+.news {
+width: 440px;
+margin-left: 55px;
+}
+
+.btnwidth {
+  font-size: 12px;
+  height: 30px;
+}
+#authlog {
+   padding-top: 30px;
+ }
+
+}
+
+@media only screen and (max-width : 568px) {
+.textwidth {
+  font-size: 15px;
+}
+.news {
+width: 400px;
+}
+
+.btnwidth {
+  height: 40px;
+}
+#authlog {
+    width: 60%;
+ } 
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+.textwidth {
+  font-size: 17px;
+}
+.fototov {
+width:65%;
+height: auto;
+}
+.nameGroup {
+font-size: 20px;
+}
+.zam {
+  font-size: 14px;
+}
+
+ .txtareawidth {
+  width: 330px;
+ }
+  .btn-menu { 
+width: 413px;
+margin-left: 3px;
+}
+
+.btnwidth {
+  height: 50px;
+}
+#authlog {
+   padding-top: 20px;
+ }
+}
+
+@media only screen and (max-width : 414px) {
+h1 {
+font-size: 20px;
+}
+.textwidth {
+  font-size: 20px;
+}
+.btn-menu { 
+width: 350px;
+}
+
+.news {
+width: 345px;
+margin-left: 15px;
+}
+.fototov {
+width:80%;
+height: auto;
+}
+.itemtxt {
+padding-top: 0px;
+height:112px;
+}
+.itemBox {
+  height: 210px;
+}
+.itemBox:hover {
+border: 0px;
+box-shadow: none;
+}
+}
+
+@media only screen and (max-width : 384px) {
+.itemBox {
+  height: 230px;
+}
+.nameGroup {
+font-size: 15px;
+}
+ .txtareawidth {
+  width: 270px;
+ }
+
+.btn-menu { 
+width: 324px;
+}
+}
+
+@media only screen and (max-width : 375px) {
+
+.btn-menu { 
+width: 320px;
+}
+.news {
+width: 305px;
+}
+.authlog {
+  width: 95%;
+}
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+.btn-menu { 
+width: 263px;
+}
+.itemBox {
+  height: 280px;
+}
+/*.itemBox:hover {
+  width: 90%;
+box-shadow: none;
+border: 0px;
+}*/
+.news {
+width: 262px;
+margin-left: 10px;
+}
+ .txtareawidth {
+  width: 242px;
+ }
+
+.fototov {
+	width: 85px;
+}
+
+}
+@media only screen and (max-width : 240px) {
+
+}
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+.text-menu {
+font-size:13px;
+}
+}

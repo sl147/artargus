@@ -1,0 +1,102 @@
+ input {
+  width: 95%;
+  height: 30px;
+  font-size: 14px;
+ }
+
+ .auth {
+   background-color: #F5FFFA;
+   border: 1px solid black;
+   width: 25em;
+   height: 33em;
+   padding: 10px;
+   margin: 10px auto;
+   opacity:0.8;
+   border-radius: 20px;
+   font-size: 15px;
+   margin-top: 35px;
+ }
+ .auth label  {
+  display: block;
+  width: 12em;
+  float: left;
+ }
+ 
+  .auth input {
+  width: 95%;
+  height: 35px;
+  font-size: 20px;
+ }
+ .auth select  {
+  width: 23em;
+  padding-left: 5px;
+ }
+
+.pinfo {
+  height: 15px;
+}
+.var {
+  font-family:'Verdana', Geneva, sans-serif ;
+  font-size: 25px;
+  color: blue;
+  font-weight:bold;
+}
+ .str-main{
+background-image: url("../image/1.jpg");
+background-attachment: fixed;
+background-size: cover;
+height: 650px;
+width: 100%;
+}
+.cont-main {
+overflow: hidden;
+margin: 0 auto;
+width: 1100px;
+border-radius: 10px;
+padding-top:1px;
+padding-bottom:12px;
+}
+
+  .authmaker {
+   width: 60em;
+   height: 94em;
+   margin: 0 auto;
+   border-radius: 20px;
+ }
+ .authmaker label  {
+  display: block;
+  width: 150px;
+  float: left;
+ }
+
+ .news {
+background-color:#FFFFFF;
+border-radius: 10px;
+opacity: 0.95;
+font-size: 11px;
+padding-bottom: 20px;
+}
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
+/*    select {
+        height:30px;
+        line-height:30px;
+        background:#f4f4f4;
+    } 
+}
+select::-moz-focus-inner { /*Remove button padding in FF*/ 
+/*    border: 0;
+    padding: 0;
+}
+@-moz-document url-prefix() { /* targets Firefox only */
+/*    select {
+        padding: 15px 0!important;
+    }
+}        
+@media screen\0 { /* IE Hacks: targets IE 8, 9 and 10 */        
+/*    select {
+        height:30px;
+        line-height:30px;
+    }     
+}
+*/
