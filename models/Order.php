@@ -76,10 +76,10 @@ class Order
 		$getDelivery = new classGetData('deliveryFirm');
 		$getPay      = new classGetData('pay');
 		$getJobs     = new classGetData('job_status');
-		$orderItem                 = $getOrder->getDataFromTableByIdMany($id,"id_ord");
+		$orderItem                 = $getOrder   ->getDataFromTableByIdMany($id,"id_ord");
 		$orderItem['nameDelivery'] = $getDelivery->getDataFromTableById($orderItem['deliver'])['name'];	
-		$orderItem['namePay']      = $getPay->getDataFromTableById($orderItem['pay'])['name'];
-		$orderItem['nameStatus']   = $getJobs->getDataFromTableById($orderItem['job'])['name'];
+		$orderItem['namePay']      = $getPay     ->getDataFromTableById($orderItem['pay'])['name'];
+		$orderItem['nameStatus']   = $getJobs    ->getDataFromTableById($orderItem['job'])['name'];
 		unset($getDelivery);
 		unset($getPay);
 		unset($getJobs);
@@ -87,13 +87,12 @@ class Order
 		return $orderItem;
 	}
 
-	public static function getOrderTabById($id) 	{
-
+	public static function getOrderTabById($id) {
 			$orderTabList = [];
-			$db = Db::getConnection();
-			$sql = "SELECT * FROM eOrdersTab WHERE orderid='".$id."'";
-			$result = $db -> query($sql);
-			$i= 0;
+			$db           = Db::getConnection();
+			$sql          = "SELECT * FROM eOrdersTab WHERE orderid='".$id."'";
+			$result       = $db -> query($sql);
+			$i            = 0;
 
 			while ($row = $result->fetch()) {
 				$orderTabList[$i]['nom']      = $i + 1;

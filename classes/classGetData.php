@@ -31,20 +31,64 @@ class classGetData
 		return (isset($list)) ? $list : [];
 	}
 
+/** Отримуєм всі дані з таблиці $this->table
+ *
+ *  @return масив даних
+ */
 	public function getDataFromTable() {
 		return $this->getRow( $this->getDB("SELECT * FROM ".$this->table) );
 	}
 
+/** Отримуєм всі дані з таблиці $this->table для запитів з Vue
+ *
+ *  @return масив даних
+ */
 	public function getDataFromTableVue() {
 		return $this->getRow( $this->getDBVue("SELECT * FROM ".$this->table) );
 	}
 
+/** Отримуєм всі дані з таблиці $this->table відсортованих по $nameOrder по $desk
+ *
+ *  @return масив даних
+ */
 	public function getDataFromTableOrder($nameOrder, $desk = 'DESC') {
 		return $this->getRow( $this->getDB("SELECT * FROM ".$this->table." ORDER BY ".$nameOrder." ".$desk) );
 	}
 
+/** Отримуєм всі дані з таблиці $this->table для запитів з Vue відсортованих по $nameOrder по $desk
+ *
+ *  @return масив даних
+ */
 	public function getDataFromTableOrderVue($nameOrder, $desk = 'DESC') {
 		return $this->getRow( $this->getDBVue("SELECT * FROM ".$this->table." ORDER BY ".$nameOrder." ".$desk) );
+	}
+
+/** Отримуєм один запис з таблиці $this->table по id
+ *
+ *  @return масив даних
+ */
+	public function getDataFromTableById($id) {
+		return (intval($id)) ? $this->getDB("SELECT * FROM ".$this->table." WHERE id=".$id)->fetch() : false;
+	}
+
+/** Отримуєм записи з таблиці $this->table по елементу $elName
+ *
+ *  @return масив даних
+ */
+	public function getDataFromTableByIdMany ($elValue,$elName) {
+		return $this->getDB("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'")->fetch();	
+	}
+
+/** Отримуєм записи з таблиці $this->table по елементу $elName з Vue
+ *
+ *  @return масив даних
+ */
+	public function getDataFromTableByIdManyRowVue ($elValue,$elName) {
+		return $this->getRow($this->getDBVue("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'"));	
+	}
+
+	public function getDataFromTableByName ($elValue,$elName) {
+		return $this->getRow($this->getDB("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'"));	
 	}
 
 	public function deleteDataFromTable($id,$nameid='id') {
@@ -54,23 +98,6 @@ class classGetData
 	public function deleteDataFromTableVue($id,$nameid) {
 		return (intval($id)) ? $this->getDBVue("DELETE FROM ".$this->table." WHERE ".$nameid."=".$id) : false;
 	}
-
-	public function getDataFromTableById($id) {
-		return (intval($id)) ? $this->getDB("SELECT * FROM ".$this->table." WHERE id=".$id)->fetch() : false;
-	}
-
-	public function getDataFromTableByIdMany ($elValue,$elName) {
-		return $this->getDB("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'")->fetch();	
-	}
-
-	public function getDataFromTableByIdManyRowVue ($elValue,$elName) {
-		return $this->getRow($this->getDBVue("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'"));	
-	}
-
-	public function getDataFromTableByName ($elValue,$elName) {
-		return $this->getRow($this->getDB("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'"));	
-	}
-
 	public function select2el() {
 		return $this->getRow( $this->getDBVue("SELECT id,name FROM ".$this->table." ORDER BY name") );
 	}
