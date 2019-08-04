@@ -3,7 +3,7 @@ return array(
 'proba' => 'contakt/proba',
 'modal' => 'contakt/modal',
 'files/myfiles.exe' => 'cart/proba2',
-
+'admin/page-([0-9]+)' => 'admin/index/$1', 
 'admin' => 'admin/index',
 'autosign' => 'insurance/autosign',
 'basket/([0-9]+)' => 'cart/del/$1',

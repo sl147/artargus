@@ -25,6 +25,10 @@ class Count
 	public function get() {		
 		return $this->select( "SELECT count($this->idName) as count FROM $this->table" );	
 	}
+	
+	public function getNewOrder() {		
+		return $this->select( "SELECT count($this->idName) as count FROM $this->table WHERE job < 4" );	
+	}
 
 	public function getId() {
 		return $this->select( "SELECT count(id) as count FROM $this->table WHERE ".$this->detail."=".$this->id ); 	

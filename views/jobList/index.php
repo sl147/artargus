@@ -45,6 +45,7 @@
 		</tbody>
 	</table>
 </div>
+
 <div class="text-center"><? echo $pagination->get(); ?></div>
 
 <?php include 'views/layouts/footer.php';?>

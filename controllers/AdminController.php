@@ -6,10 +6,13 @@
  * @author DOM
  */
 class AdminController {
-    public function actionIndex() {
-    	$orderList = Order::getAllOrderInJob();
-    	$title = "Адмін головна";
 
+    public function actionIndex($page = 1) {
+    	$orderList  = Order::getAllOrderInJob($page);
+    	$title      = "Адмін головна";
+        $totCount   = new Count('eOrders','1','id','id_ord');
+        $total      = $totCount->getNewOrder();
+        $pagination = new Pagination($total, $page, Order::SHOW_BY_DEFAULT, 'page-');
         require_once ('views/admin/index.php');
         return true;    
     }

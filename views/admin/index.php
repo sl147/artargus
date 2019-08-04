@@ -20,7 +20,7 @@
 					<tr>
 						<td><?= $item['id_ord']?></td>
 						<td>
-							<a href='/look/<?= $item['id_ord']?>'' title='Переглянути замовлення'>
+							<a href="/look/<?= $item['id_ord']?>" title='Переглянути замовлення'>
 								<?= $item['orderid']?>
 							</a>
 						</td>
@@ -33,6 +33,9 @@
 				</tbody>	
 			</table>
 		<? endif;?>	
+	<?php if ($total > Order::SHOW_BY_DEFAULT) :?>
+		<div class="text-center"><? echo $pagination->get(); ?></div>
+	<?php endif; ?>	
 	</div>
 	<?if (User::isAdmin(User::userId())) :?>
 		<div class="col-lg-1 col-md-2 col-sm-0 col-xs-0">

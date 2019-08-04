@@ -4,6 +4,8 @@
 */
 class Order
 {
+	const SHOW_BY_DEFAULT = 10;
+
 	public static function saveOrderTab () {
 		$basket  = Basket::getBasket();
 		$orderid = Basket::getBasketId();
@@ -242,29 +244,32 @@ class Order
 		return $orderList;
 	}
 
-	public static function getAllOrderInJob() {
-		$made = 4;
-		$orderList = [];
-		$sql = "SELECT * FROM eOrders WHERE job < ".$made." ORDER BY id_ord DESC";
-		$result = Db::select($sql);
-		$i= 0;
-		$getJobs     = new classGetData('job_status');
-		$getDelivery = new classGetData('deliveryFirm');
-		while ($row = $result->fetch()) {
-			$orderList[] = $row;
-			$orderList[$i]['jobsId']   = $row['job'];
-			$orderList[$i]['deliver']  = $getDelivery->getDataFromTableById($row['deliver'])['name'];;			
-			$orderList[$i]['status']   = $getJobs->getDataFromTableById($row['job'])['name'];
-			$orderTab = self::getOrderTabById($row['orderid']);
-			$orderSum = self::getOrderTabSum($orderTab);
-			$orderList[$i]['qq']       = $orderSum['qq'];
-			$orderList[$i]['suma']     = $orderSum['suma'];
-			$i++;						
+	public static function getAllOrderInJob($page) {
+		if (intval($page)) {
+			$made        = 4;
+			$orderList   = [];
+			$offset      = ($page - 1) * self::SHOW_BY_DEFAULT;
+			$result      = Db::select("SELECT * FROM eOrders WHERE job < ".$made." ORDER BY id_ord DESC LIMIT ".self::SHOW_BY_DEFAULT." OFFSET ".$offset);
+			$i           = 0;
+			$getJobs     = new classGetData('job_status');
+			$getDelivery = new classGetData('deliveryFirm');
+			while ($row = $result->fetch()) {
+				$orderList[] = $row;
+				$orderList[$i]['jobsId']   = $row['job'];
+				$orderList[$i]['deliver']  = $getDelivery->getDataFromTableById($row['deliver'])['name'];;			
+				$orderList[$i]['status']   = $getJobs->getDataFromTableById($row['job'])['name'];
+				$orderTab = self::getOrderTabById($row['orderid']);
+				$orderSum = self::getOrderTabSum($orderTab);
+				$orderList[$i]['qq']       = $orderSum['qq'];
+				$orderList[$i]['suma']     = $orderSum['suma'];
+				$i++;						
+			}
+			unset($getJobs);
+			unset($getDelivery);
+			return $orderList;
 		}
-		unset($getJobs);
-		unset($getDelivery);
-		return $orderList;
 	}
+
 	public static function getAllOrderByJob($job) {
 		$made = 4;
 		$orderList = [];
