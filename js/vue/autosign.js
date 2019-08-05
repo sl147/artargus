@@ -5,8 +5,6 @@ $(document).ready(function() {
 			selRegion : '../Vue/selRegion.php',
 			regionName: '',
 			regionKod:'',
-			lookKod: false,
-			lookName:false,
 			prTxt: false,
 			prKod: false,
 			regView: '',
@@ -65,8 +63,8 @@ $(document).ready(function() {
 				{ text: 'Хмельницька',      value: 'ВХ' },
 				{ text: 'Черкаська',        value: 'ІА' },
 				{ text: 'Черкаська',        value: 'СА' },
-				{ text: 'Чернігівска',      value: 'ІВ' },
-				{ text: 'Чернігівска',      value: 'СВ' },
+				{ text: 'Чернігівська',     value: 'ІВ' },
+				{ text: 'Чернігівська',     value: 'СВ' },
 				{ text: 'Чернівецька',      value: 'ІЕ' },
 				{ text: 'Чернівецька',      value: 'СЕ' },
 				{ text: 'Загальнодержавний',value: 'ІІ' },
@@ -82,61 +80,33 @@ $(document).ready(function() {
 				this.getRegtxt = _.filter(this.options_region, function (item) {
 				return item.value == txt;
 				})				
-			}			
-		},
-		computed: {
-			reg1: function(){
-				var regTxt = ''
-				for (var order of this.getRegtxt) {
-					console.log("computed - "+order.text+"   value - "+order.value)
-					this.regionName = order.text
-					this.regionKod = order.value
-					regTxt = regTxt + order.value+' '
-					console.log('regTxt1:'+order.value)
+			},
+			reg1: function(r){
+				this.regView = r
+				for (let order of this.getRegtxt) {
+					this.nameView = order.text
+					this.regView += order.value + ' '
 				}
-				regTxt = regTxt + this.regionName
-				console.log('regTxt:'+regTxt)				
-				//return this.regionKod+" "+this.regionName;
-				return regTxt
 			}			
 		},
 		watch: {
 			regionKod: function() {
-				this.lookKod = true
-				this.lookName = false
-				console.log("regionKod:"+this.regionKod)
 				this.getRegionKod(this.regionKod)
-				this.regView = 'Код регіону:'
-				for (var order of this.getRegtxt) {
-					//console.log("text - "+order.text+"   value - "+order.value)
-					//this.regionName = ''//order.text
-					this.nameView = order.text
-					//this.regionKod = order.value
-					this.regView += order.value + ' '
-				}
-				console.log('regkod:'+this.regView)
+				this.reg1('Код регіону:')
 			},
 			regionName: function() {
-				console.log("regionName:"+this.regionName)
 				this.getRegionText(this.regionName)
-				this.regView = 'Коди регіону:'
-				for (var order of this.getRegtxt) {
-					console.log("text - "+order.text+"   value - "+order.value)
-					//this.regionKod = ''
-					this.nameView = order.text
-					this.regView += order.value + ' '
-				}
-				console.log('regTxt:'+this.regView)
+				this.reg1('Коди регіону:')
 			},
-			},
-			created: function() {
-				for (var order of this.options_region) {
-					if (!this.single_option.includes(order.text)) {
-						this.single_option.push(order.text)
-					}
-					this.symbols.push(order.value)
+		},
+		created: function() {
+			for (var order of this.options_region) {
+				if (!this.single_option.includes(order.text)) {
+					this.single_option.push(order.text)
 				}
-				this.symbols.sort();
-			}		
+				this.symbols.push(order.value)
+			}
+			this.symbols.sort();
+		}		
 	})
 })
