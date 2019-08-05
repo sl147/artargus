@@ -5,12 +5,15 @@ $(document).ready(function() {
 			selRegion : '../Vue/selRegion.php',
 			regionName: '',
 			regionKod:'',
-			getRegtxt:[],
+			lookKod: false,
+			lookName:false,
 			prTxt: false,
 			prKod: false,
 			regView: '',
 			nameView: '',
 			single_option: [],
+			symbols: [],
+			getRegtxt:[],
 			options_region: [
 				{ text: 'АР Крим',          value: 'КК' },
 				{ text: 'АР Крим',          value: 'АК' },
@@ -99,13 +102,16 @@ $(document).ready(function() {
 		},
 		watch: {
 			regionKod: function() {
+				this.lookKod = true
+				this.lookName = false
 				console.log("regionKod:"+this.regionKod)
 				this.getRegionKod(this.regionKod)
-				this.regView = 'Коди регіону:'
-					for (var order of this.getRegtxt) {
+				this.regView = 'Код регіону:'
+				for (var order of this.getRegtxt) {
 					//console.log("text - "+order.text+"   value - "+order.value)
-					this.regionName = order.text
-					this.regionKod = order.value
+					//this.regionName = ''//order.text
+					this.nameView = order.text
+					//this.regionKod = order.value
 					this.regView += order.value + ' '
 				}
 				console.log('regkod:'+this.regView)
@@ -116,7 +122,7 @@ $(document).ready(function() {
 				this.regView = 'Коди регіону:'
 				for (var order of this.getRegtxt) {
 					console.log("text - "+order.text+"   value - "+order.value)
-					this.regionKod = order.value
+					//this.regionKod = ''
 					this.nameView = order.text
 					this.regView += order.value + ' '
 				}
@@ -128,8 +134,9 @@ $(document).ready(function() {
 					if (!this.single_option.includes(order.text)) {
 						this.single_option.push(order.text)
 					}
+					this.symbols.push(order.value)
 				}
-				//console.log(this.single_option)
+				this.symbols.sort();
 			}		
 	})
 })

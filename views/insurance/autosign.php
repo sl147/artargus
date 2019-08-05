@@ -29,9 +29,12 @@
 
 						<span>код регіону</span><br>
 						<select v-model="regionKod">
-							<option v-for="option in options_region" v-bind:value="option.value">
+<!-- 							<option v-for="option in options_region" v-bind:value="option.value">
 								{{ option.value }}
-							</option>
+							</option> -->
+							<option v-for="option in symbols" v-bind:value="option">
+								{{ option }}
+							</option>							
 						</select><br><br>
 
 
