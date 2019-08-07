@@ -10,6 +10,8 @@
 			k6: 1,
 			base: 180,
 			used: 1,
+			//select: '/Vue/selTZ.php',
+			//typeVechicle: [],
 			typeVechicle: [
 				{ type: 'B1', name: 'до 1600 куб.см',                           value: 1,   },
 				{ type: 'B2', name: 'від 1601 до 2000 куб.см',                  value: 1.14 },
@@ -75,9 +77,21 @@
 				this.k4 = this.person[this.used - 1]
 			}	
 		},
+		methods: {		
+/*			getTZ: function() {
+				this.$http.get(this.select).then(function (response) {
+					this.typeVechicle = JSON.parse(response.data)			
+				},function (error){
+					console.log(error)
+				})
+			},*/
+		},
 		created: function() {
+			
 			this.k3 = this.taxi[0]
-			this.k4 = this.person[0]
+			this.k4 = this.person[0]			
+			//console.log('here;'+this.select)
+			//this.getTZ()
 		}
 })
 })( jQuery )
