@@ -9,7 +9,7 @@ foreach ($pr as $item) {
 	$pathdir = '/album/'.$item["id_FA"].'/';
 
 	foreach ($fot as $itemFT) {
-		$fotos = $pathdir.$itemFT["fotoNameS"];
+		$fotos = $itemFT["fotoNameS"];
 	}
 
 	$new_item = array(
@@ -17,7 +17,7 @@ foreach ($pr as $item) {
 		'name'  => $item["name_FA"],
 		'msgs'  => $item["msgs_FA"],
 		'logo'  => $item["log_FA"],
-		'fotos' => $fotos,
+		'fotos' => $pathdir.$fotos,
 	);
 	array_push($data, $new_item);
 }

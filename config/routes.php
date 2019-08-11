@@ -1,8 +1,5 @@
 <?php
 return array(
-'proba' => 'contakt/proba',
-'modal' => 'contakt/modal',
-'files/myfiles.exe' => 'cart/proba2',
 'admin/page-([0-9]+)' => 'admin/index/$1', 
 'admin' => 'admin/index',
 'autosign' => 'insurance/autosign',
@@ -21,6 +18,7 @@ return array(
 'faPhoto/([0-9]+)' => 'FA/edPhoto/$1',
 'faChange/([0-9]+)' => 'FA/changeOne/$1',
 'faChange' => 'FA/change',
+'files/myfiles.exe' => 'cart/proba2',
 'find/([^А-Яа-я0-9]+)' => 'product/findProduct/$1',
 'editGroup' => 'product/index',
 'editMaker/([0-9]+)' => 'maker/dataEdMaker/$1',
@@ -64,6 +62,7 @@ return array(
 'metaTags/([0-9]+)' => 'auxiliary/MetaTagsOne/$1',
 'metaTags' => 'auxiliary/metaTags',
 'metaTagsNew' => 'auxiliary/metaTagsNew',
+'modal' => 'contakt/modal',
 'order/([0-9]+)' => 'order/look/$1',
 'orders' => 'order/index',
 'ordersfind' => 'order/indexfind',
@@ -74,6 +73,7 @@ return array(
 'parsHTML' => 'admin/parsHTML5',
 'pays' => 'auxiliary/pays',
 'print/([0-9]+)' => 'listClient/print/$1',
+'proba' => 'contakt/proba',
 'processlist' => 'admin/processlist',
 'product/([0-9]+)' => 'product/view/$1',
 'request' => 'jobList/request',

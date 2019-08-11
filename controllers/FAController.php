@@ -7,9 +7,7 @@ class FAController
 {
 
 	public function actionChange() {
-/*		$MK     = new classGetData('photoalbum');
-		$FAList = $MK->getDataFromTableOrder('id_FA');
-		unset($MK);*/
+
 		require_once ('views/fa/viewChange.php');
 		return true;
 	}
