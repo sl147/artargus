@@ -7,7 +7,7 @@ class FAController
 {
 
 	public function actionChange() {
-
+		
 		require_once ('views/fa/viewChange.php');
 		return true;
 	}
