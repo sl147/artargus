@@ -46,7 +46,9 @@
 	</table>
 </div>
 
-<div class="text-center"><? echo $pagination->get(); ?></div>
+<?php if ($total > Job::SHOW_BY_DEFAULT) :?>
+	<div class="text-center"><? echo $pagination->get(); ?></div>
+<?php endif; ?>
 
 <?php include 'views/layouts/footer.php';?>
 

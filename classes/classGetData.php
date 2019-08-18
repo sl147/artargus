@@ -55,6 +55,15 @@ class classGetData
 		return $this->getRow( $this->getDB("SELECT * FROM ".$this->table." ORDER BY ".$nameOrder." ".$desk) );
 	}
 
+/** Отримуєм дані з таблиці $this->table відсортованих по $nameOrder по $desk, LIMIT $SHOW_BY_DEFAULT
+ *
+ *  @return масив даних
+ */
+	public function getDataFromTableOrderPageVue($SHOW_BY_DEFAULT,$page,$nameOrder, $desk = 'DESC') {
+		$offset = ($page - 1) * $SHOW_BY_DEFAULT;
+		return $this->getRow( $this->getDBVue("SELECT * FROM ".$this->table." ORDER BY ".$nameOrder." ".$desk." LIMIT ".$SHOW_BY_DEFAULT." OFFSET ".$offset) );
+	}
+
 /** Отримуєм всі дані з таблиці $this->table для запитів з Vue відсортованих по $nameOrder по $desk
  *
  *  @return масив даних

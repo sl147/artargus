@@ -1,15 +1,18 @@
 <?php
 require_once ('../classes/classGetData.php');
+
+$page = intval($_GET['page']);
+$show = intval($_GET['show']);
 $MK   = new classGetData('photoalbum');
 $FT   = new classGetData('photoInAlbum');
-$pr   = $MK->getDataFromTableOrderVue('id_FA');
+$pr   = $MK->getDataFromTableOrderPageVue($show,$page,'id_FA');
 $data    = [];
 foreach ($pr as $item) {
 	$fot     = $FT->getDataFromTableByIdManyRowVue ($item["id_FA"],'id_album');
-	$pathdir = '/album/'.$item["id_FA"].'/';
 
 	foreach ($fot as $itemFT) {
 		$fotos = $itemFT["fotoNameS"];
+		break;
 	}
 
 	$new_item = array(
@@ -17,7 +20,7 @@ foreach ($pr as $item) {
 		'name'  => $item["name_FA"],
 		'msgs'  => $item["msgs_FA"],
 		'logo'  => $item["log_FA"],
-		'fotos' => $pathdir.$fotos,
+		'fotos' => '/album/'.$item["id_FA"].'/'.$fotos,
 	);
 	array_push($data, $new_item);
 }

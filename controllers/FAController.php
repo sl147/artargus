@@ -6,10 +6,21 @@
 class FAController
 {
 
-	public function actionChange() {
-		
-		require_once ('views/fa/viewChange.php');
-		return true;
+	public function actionFaChange($page = 1) {
+		if (intval($page)) {
+			$data = array(
+			  'page' => $page,
+			  'show' => FA::SHOW_BY_DEFAULT
+			);
+			$json     = json_encode($data);
+			$totCount = new Count('photoalbum','1','id','id_FA');
+	        $total    = $totCount->get();
+	        unset($totCount);
+	        $pagination = new Pagination($total, $page, FA::SHOW_BY_DEFAULT, 'page-');
+	        
+			require_once ('views/fa/viewChange.php');
+			return true;
+		}
 	}
 
 	public function actionChangeOne($id) {

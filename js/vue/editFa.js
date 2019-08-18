@@ -3,10 +3,12 @@ var vue_tovList = new Vue({
 	el: '#FAEdit',
 	data: {
 		show: false,
-		select : '../Vue/selFAll.php',
+		select : '../Vue/selFAll.php?page=',
 		del: '../Vue/delDataVue.php?tab=photoalbum&nameid=id_FA&id=',
 		delSef : '../Vue/delSef.php?id=',
 		nameM:'',
+		page:1,
+		show:1,
 		FAs: []	
 	},
 	methods: {		
@@ -27,7 +29,8 @@ var vue_tovList = new Vue({
 			}     
 		},
 		getAllFas: function () {
-			this.$http.get(this.select).then(function (response) {
+			let sel = this.select+this.page+'&show='+this.show
+			this.$http.get(sel).then(function (response) {
 				this.FAs = JSON.parse(response.data)
 			},function (error){
 				console.log(error);
@@ -35,6 +38,9 @@ var vue_tovList = new Vue({
 		}
 	},
 	created: function() {
+		let get   = window.pageFA
+		this.page = get["page"]
+		this.show = get["show"]
 		this.getAllFas()
 	}
 })

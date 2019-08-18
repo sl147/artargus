@@ -26,8 +26,12 @@
 				</button>		
 			</td>
 		</tbody>
-
 	</table>
+	<?php if ($total > FA::SHOW_BY_DEFAULT) :?>
+		<div class="text-center"><? echo $pagination->get(); ?></div>
+	<?php endif; ?>
 </div>
-
+<script>
+window.pageFA=<?= $json ?>;
+</script>
 <script src="../js/vue/editFa.js"></script>

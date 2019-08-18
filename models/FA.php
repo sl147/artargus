@@ -5,6 +5,8 @@
 class FA
 {
 
+	const SHOW_BY_DEFAULT = 4;
+
 	public static function saveFA($name,$msgs,$log) {
 		$sql = "INSERT INTO photoalbum (name_FA,msgs_FA,log_FA)
 				VALUES(:name,:msgs,:log)";
