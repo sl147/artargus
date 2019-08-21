@@ -8,8 +8,26 @@
 class AdminController {
 
     public function actionIndex($page = 1) {
-    	$orderList  = Order::getAllOrderInJob($page);
-    	$title      = "Адмін головна";
+        if (intval($page)) {
+            $data = array(
+              'page' => $page,
+              //'show' => FA::SHOW_BY_DEFAULT
+              'show' => 10
+            );
+            $json       = json_encode($data);
+        	$title      = "Адмін головна";
+            $totCount   = new Count('eOrders','1','id','id_ord');
+            $total      = $totCount->getNewOrder();
+            unset($totCount);
+            $pagination = new Pagination($total, $page, Order::SHOW_BY_DEFAULT, 'page-');
+            require_once ('views/admin/indexVue.php');
+            return true;
+        }    
+    }
+
+    public function actionIndex1($page = 1) {
+        $orderList  = Order::getAllOrderInJob($page);
+        $title      = "Адмін головна";
         $totCount   = new Count('eOrders','1','id','id_ord');
         $total      = $totCount->getNewOrder();
         $pagination = new Pagination($total, $page, Order::SHOW_BY_DEFAULT, 'page-');

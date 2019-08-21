@@ -59,6 +59,15 @@ class classGetData
  *
  *  @return масив даних
  */
+	public function getOrderPageVue($SHOW_BY_DEFAULT,$page,$nameOrder, $desk = 'DESC') {
+		$offset = ($page - 1) * $SHOW_BY_DEFAULT;
+		return $this->getRow( $this->getDBVue("SELECT * FROM ".$this->table." WHERE job = 1 ORDER BY ".$nameOrder." ".$desk." LIMIT ".$SHOW_BY_DEFAULT." OFFSET ".$offset) );
+	}
+
+/** Отримуєм дані з таблиці $this->table відсортованих по $nameOrder по $desk, LIMIT $SHOW_BY_DEFAULT
+ *
+ *  @return масив даних
+ */
 	public function getDataFromTableOrderPageVue($SHOW_BY_DEFAULT,$page,$nameOrder, $desk = 'DESC') {
 		$offset = ($page - 1) * $SHOW_BY_DEFAULT;
 		return $this->getRow( $this->getDBVue("SELECT * FROM ".$this->table." ORDER BY ".$nameOrder." ".$desk." LIMIT ".$SHOW_BY_DEFAULT." OFFSET ".$offset) );
@@ -70,6 +79,14 @@ class classGetData
  */
 	public function getDataFromTableOrderVue($nameOrder, $desk = 'DESC') {
 		return $this->getRow( $this->getDBVue("SELECT * FROM ".$this->table." ORDER BY ".$nameOrder." ".$desk) );
+	}
+
+/** Отримуєм один запис з таблиці $this->table по id
+ *
+ *  @return масив даних
+ */
+	public function getDataFromTableByIdVue($id) {
+		return (intval($id)) ? $this->getDBVue("SELECT * FROM ".$this->table." WHERE id=".$id)->fetch() : false;
 	}
 
 /** Отримуєм один запис з таблиці $this->table по id

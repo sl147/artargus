@@ -2,7 +2,6 @@ $(document).ready(function() {
 var vue_tovList = new Vue({
 	el: '#FAEdit',
 	data: {
-		show: false,
 		select : '../Vue/selFAll.php?page=',
 		del: '../Vue/delDataVue.php?tab=photoalbum&nameid=id_FA&id=',
 		delSef : '../Vue/delSef.php?id=',

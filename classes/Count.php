@@ -27,7 +27,7 @@ class Count
 	}
 	
 	public function getNewOrder() {		
-		return $this->select( "SELECT count($this->idName) as count FROM $this->table WHERE job < 4" );	
+		return $this->select( "SELECT count($this->idName) as count FROM $this->table WHERE job = 1" );	
 	}
 
 	public function getId() {
