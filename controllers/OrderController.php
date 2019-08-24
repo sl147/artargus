@@ -5,7 +5,7 @@
 class OrderController {
 	
 	public function actionLook($id) {
-		echo "id=$id";
+		$id          = Auxiliary::getIntval($id);
 		$getOrders   = new classGetData('eOrders');
 		$orderOne    = $getOrders->getDataFromTableByIdMany($id,"id_Client");
 		$orderTabOne = Order::getOrderTabById($id);
@@ -64,8 +64,8 @@ class OrderController {
 	}
 
 	public function actionChangeStatus() {
-		   $job = $_POST['job'];
-			$id = $_POST['id'];
+		$job    = $_POST['job'];
+		$id     = $_POST['id'];
 		$result = Order::edit($id,$job);				
 	}
 }

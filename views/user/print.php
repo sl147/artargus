@@ -75,7 +75,7 @@
 	<td><?= $item['name']?></td>
 	<td><?= $item['article']?></td>
 	<td><?= number_format($item['price'], 2, '.', '')?></td>
-	<td class="text-center"><?= $item['q']?></td>
+	<td class="text-center"><?= $item['quantity']?></td>
 	<td><?= number_format($item['suma'], 2, '.', '')?></td>
 </tr>
 <?php endforeach; ?>

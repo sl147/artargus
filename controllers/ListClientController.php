@@ -23,6 +23,7 @@ class ListClientController
 	}	
 
 	public function actionOutExcell($id) {
+		$id       = Auxiliary::getIntval($id);
 		$order    = Order::getOrderById($id);
 		$orderTab = Order::getOrderTabById($order['orderid']);
 		$orderSum = Order::getOrderTabSum($orderTab);		
@@ -33,7 +34,7 @@ class ListClientController
 	}
 
 	public function actionChangeMan($id,$idManager) {
-		$result = User::changeManager($id,$idManager);				
+		$result    = User::changeManager(Auxiliary::getIntval($id),Auxiliary::getIntval($idManager));
 	}
 
 	public function actionChangeRole() {
@@ -43,8 +44,7 @@ class ListClientController
 	}
 
 	public function actionChangeDataClient($id) {
-
-		$client = User::getUserById($id);
+		$client = User::getUserById(Auxiliary::getIntval($id));
 		
 		if(isset($_POST['submit']))
 		{
@@ -70,7 +70,7 @@ class ListClientController
 	}
 
 	public function actionEdit($id)	{
-		$client = User::getUserById($id);
+		$client = User::getUserById(Auxiliary::getIntval($id));
 		echo "name - ".$client['name'];
 
 		require_once ('views/user/edit.php');
@@ -85,27 +85,25 @@ class ListClientController
 	}
 
 	public function actionListCl($id) {
-		$order    = Order::getOrderById($id);
+		$order    = Order::getOrderById(Auxiliary::getIntval($id));
 		$orderTab = Order::getOrderTabById($order['orderid']);
 		$orderSum = Order::getOrderTabSum($orderTab);
-
 		require_once ('views/user/listCl.php');
 		require_once ('views/user/listClFooter.php');
 		return true;
 	}
 
 	public function actionLook($id) {
-		$order    = Order::getOrderById($id);
+		$order    = Order::getOrderById(Auxiliary::getIntval($id));
 		$orderTab = Order::getOrderTabById($order['orderid']);
 		$orderSum = Order::getOrderTabSum($orderTab);
-
 		require_once ('views/user/listCl.php');
 		require_once ('views/user/lookFooter.php');
 		return true;
 	}
 
 	public function actionPrint($id) {
-		$order    = Order::getOrderById($id);
+		$order    = Order::getOrderById(Auxiliary::getIntval($id));
 		$orderTab = Order::getOrderTabById($order['orderid']);
 		$orderSum = Order::getOrderTabSum($orderTab);
 

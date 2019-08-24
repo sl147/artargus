@@ -7,42 +7,37 @@ class FAController
 {
 
 	public function actionFaChange($page = 1) {
-		if (intval($page)) {
-			$data = array(
-			  'page' => $page,
-			  'show' => FA::SHOW_BY_DEFAULT
-			);
-			$json     = json_encode($data);
-			$totCount = new Count('photoalbum','1','id','id_FA');
-	        $total    = $totCount->get();
-	        unset($totCount);
-	        $pagination = new Pagination($total, $page, FA::SHOW_BY_DEFAULT, 'page-');
-	        
-			require_once ('views/fa/viewChange.php');
-			return true;
-		}
+		$page = Auxiliary::getIntval($page);
+		$data = array(
+		  'page' => $page,
+		  'show' => FA::SHOW_BY_DEFAULT
+		);
+		$json       = json_encode($data);
+        $total      = Auxiliary::getTotal('photoalbum','1','id','id_FA',1);
+        $pagination = Auxiliary::getPagination ($total,FA::SHOW_BY_DEFAULT, $page);	        
+		require_once ('views/fa/viewChange.php');
+		return true;
 	}
 
 	public function actionChangeOne($id) {
-        if (intval($id)) {
-			$data = array(
-			  'id'   => $id,
-			);
-			$json = json_encode($data);
-			if(isset($_POST['submit'])) {
-				$name   = Auxiliary::filterTXT('post', 'name_FA');
-				$descr  = Auxiliary::filterTXT('post', 'descr');
-				$author = Auxiliary::filterTXT('post', 'author');
-				$res    = FA::updateFA($id,$name,$descr,$author);
-				$loc="Location:".$_SERVER['HTTP_REFERER'];
-				header( $loc);
-			}
-			$getData = new classGetData('photoalbum');
-			$FAOne   = $getData->getDataFromTableByIdMany($id,'id_FA');
-			unset($getData);	
-			require_once ('views/fa/changeOne.php');
-			return true; 
-        }
+		$id = Auxiliary::getIntval($id);
+		$data = array(
+		  'id'   => $id,
+		);
+		$json = json_encode($data);
+		if(isset($_POST['submit'])) {
+			$name   = Auxiliary::filterTXT('post', 'name_FA');
+			$descr  = Auxiliary::filterTXT('post', 'descr');
+			$author = Auxiliary::filterTXT('post', 'author');
+			$res    = FA::updateFA($id,$name,$descr,$author);
+			$loc="Location:".$_SERVER['HTTP_REFERER'];
+			header( $loc);
+		}
+		$getData = new classGetData('photoalbum');
+		$FAOne   = $getData->getDataFromTableByIdMany($id,'id_FA');
+		unset($getData);	
+		require_once ('views/fa/changeOne.php');
+		return true;
 	}
 
 	public function actionIndex() {
@@ -68,21 +63,20 @@ class FAController
 
 	
 	public function actionEdPhoto($id) {
-        if (intval($id)) {            
-			if(isset($_POST['submit'])) {
-				$subscribe = Auxiliary::filterTXT('post', 'subscribe');
-				if (!empty($_FILES['file'] ['tmp_name'])) {
-					$pathdir  = dirname(__DIR__)."/album/".$id."/";
-					$fotoL    = Auxiliary::rus2translit($_FILES['file']['name']);					
-					$webPName = explode('.', $fotoL)[0].'.webp';
-					$fotoS    = 's_'.$webPName;
-					$res      = Auxiliary::savePhoto($webPName,$pathdir);
-					$res      = FA::savePhoto($id,$subscribe,$webPName,$fotoS);
-				}
+        $id = Auxiliary::getIntval($id);            
+		if(isset($_POST['submit'])) {
+			$subscribe = Auxiliary::filterTXT('post', 'subscribe');
+			if (!empty($_FILES['file'] ['tmp_name'])) {
+				$pathdir  = dirname(__DIR__)."/album/".$id."/";
+				$fotoL    = Auxiliary::rus2translit($_FILES['file']['name']);					
+				$webPName = explode('.', $fotoL)[0].'.webp';
+				$fotoS    = 's_'.$webPName;
+				$res      = Auxiliary::savePhoto($webPName,$pathdir);
+				$res      = FA::savePhoto($id,$subscribe,$webPName,$fotoS);
 			}
-			require_once ('views/fa/uplPhoto.php');
-			return true; 
 		}
+		require_once ('views/fa/uplPhoto.php');
+		return true;
 	}
 }
 ?>

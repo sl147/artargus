@@ -53,7 +53,7 @@ class Order
 
 	public static function getOrderByClient ($id) {
 		$getOrders   = new classGetData('eOrders');
-		$result      = $getOrders->getDataFromTableByName($id,"id_Client");
+		$result      = $getOrders->getDataFromTableByNameH(Auxiliary::getIntval($id),"id_Client");
 		$i= 0;
 		$getJobs     = new classGetData('job_status');
 		$getDelivery = new classGetData('job_status');
@@ -76,7 +76,7 @@ class Order
 		$getDelivery = new classGetData('deliveryFirm');
 		$getPay      = new classGetData('pay');
 		$getJobs     = new classGetData('job_status');
-		$orderItem                 = $getOrder   ->getDataFromTableByIdMany($id,"id_ord");
+		$orderItem   = $getOrder   ->getDataFromTableByIdMany(Auxiliary::getIntval($id),"id_ord");
 		$orderItem['nameDelivery'] = $getDelivery->getDataFromTableById($orderItem['deliver'])['name'];	
 		$orderItem['namePay']      = $getPay     ->getDataFromTableById($orderItem['pay'])['name'];
 		$orderItem['nameStatus']   = $getJobs    ->getDataFromTableById($orderItem['job'])['name'];
@@ -90,7 +90,7 @@ class Order
 	public static function getOrderTabById($id) {
 			$orderTabList = [];
 			$db           = Db::getConnection();
-			$sql          = "SELECT * FROM eOrdersTab WHERE orderid='".$id."'";
+			$sql          = "SELECT * FROM eOrdersTab WHERE orderid='".Auxiliary::getIntval($id)."'";
 			$result       = $db -> query($sql);
 			$i            = 0;
 
@@ -244,29 +244,28 @@ class Order
 	}
 
 	public static function getAllOrderInJob($page) {
-		if (intval($page)) {
-			$made        = 4;
-			$orderList   = [];
-			$offset      = ($page - 1) * self::SHOW_BY_DEFAULT;
-			$result      = Db::select("SELECT * FROM eOrders WHERE job < ".$made." ORDER BY id_ord DESC LIMIT ".self::SHOW_BY_DEFAULT." OFFSET ".$offset);
-			$i           = 0;
-			$getJobs     = new classGetData('job_status');
-			$getDelivery = new classGetData('deliveryFirm');
-			while ($row = $result->fetch()) {
-				$orderList[] = $row;
-				$orderList[$i]['jobsId']   = $row['job'];
-				$orderList[$i]['deliver']  = $getDelivery->getDataFromTableById($row['deliver'])['name'];;			
-				$orderList[$i]['status']   = $getJobs->getDataFromTableById($row['job'])['name'];
-				$orderTab = self::getOrderTabById($row['orderid']);
-				$orderSum = self::getOrderTabSum($orderTab);
-				$orderList[$i]['qq']       = $orderSum['qq'];
-				$orderList[$i]['suma']     = $orderSum['suma'];
-				$i++;						
-			}
-			unset($getJobs);
-			unset($getDelivery);
-			return $orderList;
+		$page   = Auxiliary::getIntval($page);
+		$made        = 4;
+		$orderList   = [];
+		$offset      = ($page - 1) * self::SHOW_BY_DEFAULT;
+		$result      = Db::select("SELECT * FROM eOrders WHERE job < ".$made." ORDER BY id_ord DESC LIMIT ".self::SHOW_BY_DEFAULT." OFFSET ".$offset);
+		$i           = 0;
+		$getJobs     = new classGetData('job_status');
+		$getDelivery = new classGetData('deliveryFirm');
+		while ($row = $result->fetch()) {
+			$orderList[] = $row;
+			$orderList[$i]['jobsId']   = $row['job'];
+			$orderList[$i]['deliver']  = $getDelivery->getDataFromTableById($row['deliver'])['name'];;			
+			$orderList[$i]['status']   = $getJobs->getDataFromTableById($row['job'])['name'];
+			$orderTab = self::getOrderTabById($row['orderid']);
+			$orderSum = self::getOrderTabSum($orderTab);
+			$orderList[$i]['qq']       = $orderSum['qq'];
+			$orderList[$i]['suma']     = $orderSum['suma'];
+			$i++;						
 		}
+		unset($getJobs);
+		unset($getDelivery);
+		return $orderList;
 	}
 
 	public static function getAllOrderByJob($job) {

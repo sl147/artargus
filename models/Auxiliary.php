@@ -12,6 +12,44 @@ class Auxiliary
 		return $db;
 	}
 
+	public static function getIntval ($i) {
+		$i = intval($i);
+        return ($i>0) ? $i : 1;
+	}
+
+	public static function isId($table, $id, $detail,$idName) {
+		$id   = self::getIntval($id);
+		echo "id=$id";
+		for ($i=$id; $i < 1000; $i++) { 
+			echo "i=$i";
+			$c = self::getTotal ($table, $i, $detail, $idName,3);
+			if ($c>0) return $i;
+		}
+		return false;
+	}
+
+	public static function getTotal ($table, $id, $detail, $idName,$var) {
+		$totCount   = new Count($table,$id,$detail,$idName);
+		switch ($var) {
+		 	case 1:
+		 		return $totCount->get();
+		 		break;
+		 	case 2:
+		 		return $totCount->getNewOrder();
+		 		break;
+		 	case 3:
+		 		return $totCount->getId();
+		 		break;
+		 	default:
+		 		break;
+		 } 
+		
+	}
+
+	public static function getPagination ($total,$show, $page) {		
+		return new Pagination($total, $page, $show, 'page-');
+	}
+
 	public static function getDate($dt) {
 		$tyre = strpos($dt, "/");
 		$day  = substr($dt, 0, $tyre);

@@ -9,15 +9,8 @@ $pr   = $MK->getOrderPageVue($show,$page,'id_ord');
 $data = [];
 
 foreach ($pr as $item) {
-	$new_item = array(
-		'id'    => $item["id_ord"],
-		'name'  => $item["name"],
-		'phone' => $item["phone"],
-		'email' => $item["email"],
-	  'orderid' => $item["orderid"],
-	  'status'  => $jobs->getDataFromTableByIdVue($item['job'])['name'],
-	);
-	array_push($data, $new_item);
+	$item['status'] = $jobs->getDataFromTableByIdVue($item['job'])['name'];
+	array_push($data, $item);
 }
 
 unset($MK);

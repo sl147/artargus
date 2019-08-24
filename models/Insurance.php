@@ -5,7 +5,7 @@
 class Insurance
 {
 	
-	const SHOWCOMMENT_BY_DEFAULT = 20;
+	const SHOWCOMMENT_BY_DEFAULT = 10;
 
 	private static function db() {
 		$params = include ('../config/db_params.php');

@@ -8,7 +8,7 @@
 class AdminController {
 
     public function actionIndex($page = 1) {
-        if (intval($page)) {
+        $page = Auxiliary::getIntval($page); 
             $data = array(
               'page' => $page,
               //'show' => FA::SHOW_BY_DEFAULT
@@ -16,13 +16,10 @@ class AdminController {
             );
             $json       = json_encode($data);
         	$title      = "Адмін головна";
-            $totCount   = new Count('eOrders','1','id','id_ord');
-            $total      = $totCount->getNewOrder();
-            unset($totCount);
-            $pagination = new Pagination($total, $page, Order::SHOW_BY_DEFAULT, 'page-');
+            $total      = Auxiliary::getTotal('eOrders','1','id','id_ord',2);
+            $pagination = Auxiliary::getPagination ($total,Order::SHOW_BY_DEFAULT, $page);
             require_once ('views/admin/indexVue.php');
-            return true;
-        }    
+            return true;  
     }
 
     public function actionIndex1($page = 1) {

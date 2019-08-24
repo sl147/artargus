@@ -17,9 +17,9 @@
 				</thead>
 				<tbody v-for="order in orders">
 					<tr>
-						<td>{{order.id}}</td>
+						<td>{{order.id_ord}}</td>
 						<td>
-							<a :href="/look/+order.id" title='Переглянути замовлення'>
+							<a :href="/look/+order.id_ord" title='Переглянути замовлення'>
 								{{order.orderid}}
 							</a>							
 						</td>

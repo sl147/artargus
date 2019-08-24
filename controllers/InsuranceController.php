@@ -18,22 +18,20 @@ class InsuranceController
 	}
 
 	public function actionInsuranceCommentEdit($page = 1) {
-		if (intval($page)) {
-			if(isset($_POST['submit'])) {
-				$id       = Auxiliary::filterINT('post','id');
-				$act      = Auxiliary::filterINT('post','active');
-				$getComCl = new classGetData('CommentCalculators');
-				$res      = $getComCl->activated($id,$act, 'CommentCalculators' );
-				unset($getComCl);
-			}
-			$title    = "перегляд коментарів клієнтів";
-			$comments = Insurance::getAllComment($page);
-			$classCount = new Count('CommentCalculators');
-			$total      = $classCount->get();
-			$pagination = new Pagination($total, $page, Insurance::SHOWCOMMENT_BY_DEFAULT, 'page-');
-			require_once ('views/insurance/insuranceCommentEdit.php');
-			return true;
+		$page = Auxiliary::getIntval($page);
+		if(isset($_POST['submit'])) {
+			$id       = Auxiliary::filterINT('post','id');
+			$act      = Auxiliary::filterINT('post','active');
+			$getComCl = new classGetData('CommentCalculators');
+			$res      = $getComCl->activated($id,$act, 'CommentCalculators' );
+			unset($getComCl);
 		}
+		$title      = "перегляд коментарів клієнтів";
+		$comments   = Insurance::getAllComment($page);
+        $total      = Auxiliary::getTotal('CommentCalculators','1','id','id',1);
+        $pagination = Auxiliary::getPagination ($total,Insurance::SHOWCOMMENT_BY_DEFAULT, $page);	
+		require_once ('views/insurance/insuranceCommentEdit.php');
+		return true;
 	}
 
 	private function smail($type, $mass) {
@@ -100,15 +98,13 @@ class InsuranceController
 	}
 
 	public function actionComeToPlugin($page = 1) {
-		if (intval($page)) {
-			$title      = "переходи на плагін";
-			$lists      = Insurance::getComeToPlugin($page);
-			$classCount = new Count('ComeToPlugin');
-			$total      = $classCount->get();
-			$pagination = new Pagination($total, $page, Insurance::SHOWCOMMENT_BY_DEFAULT, 'page-');
-			require_once ('views/insurance/insuranceComeToPlugin.php');
-			return true;
-		}
+		$page       = Auxiliary::getIntval($page);
+		$title      = "переходи на плагін";
+		$lists      = Insurance::getComeToPlugin($page);
+        $total      = Auxiliary::getTotal('ComeToPlugin','1','id','id',1);
+        $pagination = Auxiliary::getPagination ($total,Insurance::SHOWCOMMENT_BY_DEFAULT, $page);
+		require_once ('views/insurance/insuranceComeToPlugin.php');
+		return true;
 	}
 }
 ?>

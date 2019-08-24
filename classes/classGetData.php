@@ -117,6 +117,10 @@ class classGetData
 		return $this->getRow($this->getDB("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'"));	
 	}
 
+	public function getDataFromTableByNameH ($elValue,$elName) {
+		return $this->getDB("SELECT * FROM ".$this->table." WHERE ".$elName."= '$elValue'");
+	}
+
 	public function deleteDataFromTable($id,$nameid='id') {
 		return (intval($id)) ? $this->getDB("DELETE FROM ".$this->table." WHERE ".$nameid."=".$id) : false;
 	}

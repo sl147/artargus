@@ -31,7 +31,7 @@ class Count
 	}
 
 	public function getId() {
-		return $this->select( "SELECT count(id) as count FROM $this->table WHERE ".$this->detail."=".$this->id ); 	
+		return $this->select( "SELECT count($this->idName) as count FROM $this->table WHERE ".$this->idName."=".$this->id ); 	
 	}
 }
 ?>
