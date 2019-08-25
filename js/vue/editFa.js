@@ -14,13 +14,13 @@ var vue_tovList = new Vue({
 		delItem: function(item) {
 			let accepted = confirm('Ви дійсно хочете видалити цей запис?');
 			if (accepted) {
-				let del = this.del + item.id
+				let del = this.del + item.id_FA
 				this.$http.delete(del).then(function (response) {	          
 					this.FAs.splice(this.FAs.indexOf(item),1)
 				},function (error){
 					console.log(error);
 				})
-				del = this.delSef + item.id+"&namelink=faChange"
+				del = this.delSef + item.id_FA+"&namelink=faChange"
 				this.$http.get(del).then(function (response) {
 				},function (error){
 					console.log(error);

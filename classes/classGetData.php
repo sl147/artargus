@@ -128,6 +128,7 @@ class classGetData
 	public function deleteDataFromTableVue($id,$nameid) {
 		return (intval($id)) ? $this->getDBVue("DELETE FROM ".$this->table." WHERE ".$nameid."=".$id) : false;
 	}
+
 	public function select2el() {
 		return $this->getRow( $this->getDBVue("SELECT id,name FROM ".$this->table." ORDER BY name") );
 	}
@@ -138,8 +139,8 @@ class classGetData
 		return $result -> execute();
 	}
 
-	public function edit2el($name,$id) {
-		return $this->changeData( "UPDATE ".$this->table." SET name=:name WHERE id='".$id."'", $name);
+	public function edit2el($name,$id,$idName='id',$nameName='name') {
+		return $this->changeData( "UPDATE ".$this->table." SET ".$nameName."=:name WHERE ".$idName."='".$id."'", $name);
 	}
 
 	public function add2el($name) {

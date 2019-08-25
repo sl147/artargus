@@ -85,23 +85,22 @@ class AuxiliaryController
 	}
 
 	public function actionMetaTagsOne($id) {
-		if (intval($id)) {
-			if(isset($_POST['submit'])) {
-				$url_name = Auxiliary::filterTXT('post', 'url_name');
-				$title    = Auxiliary::filterTXT('post', 'title');
-				$descr    = Auxiliary::filterTXT('post', 'descr');
-				$keywords = Auxiliary::filterTXT('post', 'keywords');
+		$id = Auxiliary::getIntval($id);
+		if(isset($_POST['submit'])) {
+			$url_name = Auxiliary::filterTXT('post', 'url_name');
+			$title    = Auxiliary::filterTXT('post', 'title');
+			$descr    = Auxiliary::filterTXT('post', 'descr');
+			$keywords = Auxiliary::filterTXT('post', 'keywords');
 
-				$res      = Auxiliary::editMetaTags($id,$url_name,$title,$descr,$keywords);
-				$loc="Location:".$_SERVER['HTTP_REFERER'];
-				header( $loc);
-			}
-			$getData  = new classGetData('meta_tags');
-			$MTOne   = $getData->getDataFromTableById($id);
-			unset($getData);
-			require_once ('views/auxiliary/changeOneMetaTags.php');
-			return true;
-		} 		
+			$res      = Auxiliary::editMetaTags($id,$url_name,$title,$descr,$keywords);
+			$loc="Location:".$_SERVER['HTTP_REFERER'];
+			header( $loc);
+		}
+		$getData  = new classGetData('meta_tags');
+		$MTOne   = $getData->getDataFromTableById($id);
+		unset($getData);
+		require_once ('views/auxiliary/changeOneMetaTags.php');
+		return true;
 	}
 }
 ?>

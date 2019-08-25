@@ -329,5 +329,19 @@ class Auxiliary
 		$result -> bindParam(':name', $name, PDO::PARAM_STR);
 		return $result -> execute();
 	}
+
+	public static function getmeta($url_name) {
+		$meta      = [];
+		$getmeta   = new classGetData('meta_tags');
+		$meta      = $getmeta->getDataFromTableByIdMany($url_name,"url_name");
+		unset($getmeta);
+		if ($meta) {
+			$meta['keywords'] = substr($meta['keywords'],0,245);
+			$meta['descr']    = substr($meta['descr'],0,200);
+			$meta['title']    = substr($meta['title'],0,75);
+		}
+		return $meta;
+	}
+
 }
 ?>

@@ -1,5 +1,5 @@
 <?php include 'views/layouts/headerAdmin.php';?>
-<h2>Назва фотоальбому:</h2><br>
+<h2>Назва фотоальбому11:</h2><br>
 <form  method = "POST">
 	<textarea name="name_FA" id = "name_FA" rows ='2' cols = '50'><?= $FAOne['name_FA']?></textarea><br><br>
 	<h2>Опис фотоальбому:</h2><br>

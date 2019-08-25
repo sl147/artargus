@@ -1,7 +1,7 @@
 <?php
 
-class CabinetController
-{	
+class CabinetController {
+
 	public function actionIndex()
 	{
 		$userId = User::chekLogged();
@@ -11,15 +11,7 @@ class CabinetController
 	}
 
 	public function actionEdit() {
-		$getmeta   = new classGetData('meta_tags');
-		$meta      = $getmeta->getDataFromTableByIdMany("cabinet/edit","url_name");
-		unset($getmeta);
-		if ($meta) {
-			$meta['keywords'] = substr($meta['keywords'],0,245);
-			$meta['descr']    = substr($meta['descr'],0,200);
-			$meta['title']    = substr($meta['title'],0,75);
-			$meta['follow']   = $meta['follow'];
-		}
+		$meta     = Auxiliary::getMeta("cabinet/edit");
 		$userId   = User::chekLogged();
 		$user     = User::getUserById($userId);
 		$login    = $user['user_login'];
@@ -47,15 +39,7 @@ class CabinetController
 	}
 
 	public function actionHistory()	{
-		$getmeta   = new classGetData('meta_tags');
-		$meta      = $getmeta->getDataFromTableByIdMany("cabinet/edit","url_name");
-		unset($getmeta);
-		if ($meta) {
-			$meta['keywords'] = substr($meta['keywords'],0,245);
-			$meta['descr']    = substr($meta['descr'],0,200);
-			$meta['title']    = substr($meta['title'],0,75);
-			$meta['follow']   = $meta['follow'];
-		}
+		$meta      = Auxiliary::getMeta("cabinet/edit");
 		$id        = User::userId();
 		$orderList = Order::getOrderByClient ($id);
 	

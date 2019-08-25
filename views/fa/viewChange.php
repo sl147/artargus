@@ -12,11 +12,11 @@
 		</tr>
 		<tbody  v-for="FA in FAs">
 			<td><img class='faimg' :src="FA.fotos" alt=""></td>
-			<td>{{FA.name}}</td>			
-			<td>{{FA.logo}}</td>
-			<td>{{FA.msgs}}</td>
+			<td>{{FA.name_FA}}</td>			
+			<td>{{FA.log_FA}}</td>
+			<td>{{FA.msgs_FA}}</td>
 			<td>						
-				<a class="btn btn-default btn-lg" :href="/faChange/+FA.id" title="редагувати запис">
+				<a class="btn btn-default btn-lg" :href="/faChange/+FA.id_FA" title="редагувати запис">
 					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				</a>
 			</td>

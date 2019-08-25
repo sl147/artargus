@@ -6,19 +6,9 @@ class JobListController
 {
 
 	public function actionIndex($page = 1)	{
-		$page       = Auxiliary::getIntval($page);
-		$getmeta  = new classGetData('meta_tags');
-		$meta     = $getmeta->getDataFromTableByIdMany("jobListl","url_name");
-		unset($getmeta);
-
-        $jobsList = Job::getJobs($page);
-
-		if ($meta) {
-			$meta['keywords'] = substr($meta['keywords'],0,245);
-			$meta['descr']    = substr($meta['descr'],0,200);
-			$meta['title']    = substr($meta['title'],0,75);
-			$meta['follow']   = $meta['follow'];			
-		}		
+		$page     = Auxiliary::getIntval($page);
+		$meta     = Auxiliary::getMeta("jobListl");
+        $jobsList = Job::getJobs($page);		
 		if(isset($_POST['submit'])) {
 			$name   = Auxiliary::filterTXT('post', 'pan');
 			$tel    = Auxiliary::filterTXT('post', 'tel');
@@ -44,22 +34,13 @@ class JobListController
 	}
 
 	public function actionjobListOne($id)	{
-		$id = Auxiliary::getIntval($id);
-		$getmeta   = new classGetData('meta_tags');
-		$meta      = $getmeta->getDataFromTableByIdMany("jobListOne","url_name");
-		unset($getmeta);
-
+		$id         = Auxiliary::getIntval($id);
+		$meta       = Auxiliary::getMeta("jobListOne");
 		$jobListOne = Job::getJobsOne($id);
 		$getJobs    = new classGetData('photoalbum');
 		$author     = $getJobs->getDataFromTableByIdMany($id,"id_FA");
 		unset($getJobs);
-
-		if ($meta) {
-			$meta['keywords'] = substr($meta['keywords'],0,245);
-			$meta['descr']    = substr($meta['descr']." ".trim(strip_tags($author['name_FA'])),0,200);
-			$meta['title']    = substr($meta['title'].' '.$author['log_FA']." ".trim(strip_tags($author['name_FA'])),0,75);
-			$meta['follow']   = $meta['follow'];
-		}			
+			
 		if(isset($_POST['submit'])) {
 			$txt_com = Auxiliary::filterTXT('post', 'txt_com');
 			$spamCl  = new ClassSpam();

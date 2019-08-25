@@ -11,18 +11,10 @@ foreach ($pr as $item) {
 	$fot     = $FT->getDataFromTableByIdManyRowVue ($item["id_FA"],'id_album');
 
 	foreach ($fot as $itemFT) {
-		$fotos = $itemFT["fotoNameS"];
+		$item['fotos'] = $itemFT["fotoNameS"];
 		break;
 	}
-
-	$new_item = array(
-		'id'    => $item["id_FA"],
-		'name'  => $item["name_FA"],
-		'msgs'  => $item["msgs_FA"],
-		'logo'  => $item["log_FA"],
-		'fotos' => '/album/'.$item["id_FA"].'/'.$fotos,
-	);
-	array_push($data, $new_item);
+	array_push($data, $item);
 }
 unset($MK);
 unset($FT);

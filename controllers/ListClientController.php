@@ -4,6 +4,10 @@
 */
 class ListClientController
 {
+	function __construct() {
+		$this->order = [];
+	}
+
 	public function actionIndex() {
 
 		$ClientList      = User::getClients(1);
@@ -84,28 +88,31 @@ class ListClientController
 		return true;
 	}
 
-	public function actionListCl($id) {
-		$order    = Order::getOrderById(Auxiliary::getIntval($id));
-		$orderTab = Order::getOrderTabById($order['orderid']);
+	public function getOrder($id) {
+		$this->order    = Order::getOrderById(Auxiliary::getIntval($id));
+		$orderTab = Order::getOrderTabById($this->order['orderid']);
 		$orderSum = Order::getOrderTabSum($orderTab);
+		$order = $this->order;
 		require_once ('views/user/listCl.php');
+	}
+
+	public function actionListCl($id) {
+		$r = self::getOrder($id);
 		require_once ('views/user/listClFooter.php');
 		return true;
 	}
 
 	public function actionLook($id) {
-		$order    = Order::getOrderById(Auxiliary::getIntval($id));
-		$orderTab = Order::getOrderTabById($order['orderid']);
-		$orderSum = Order::getOrderTabSum($orderTab);
-		require_once ('views/user/listCl.php');
+		$r     = self::getOrder($id);
+		$order = $this->order;
 		require_once ('views/user/lookFooter.php');
 		return true;
 	}
 
 	public function actionPrint($id) {
-		$order    = Order::getOrderById(Auxiliary::getIntval($id));
-		$orderTab = Order::getOrderTabById($order['orderid']);
-		$orderSum = Order::getOrderTabSum($orderTab);
+		 $order    = Order::getOrderById(Auxiliary::getIntval($id));
+		 $orderTab = Order::getOrderTabById($order['orderid']);
+		 $orderSum = Order::getOrderTabSum($orderTab);
 
 		require_once ('views/user/print.php');
 		return true;

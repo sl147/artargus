@@ -11,7 +11,7 @@ var vue = new Vue({
 	},
 	methods: {
 		change: function (item) {
-		    let req = this.upFA+item.id+"&subscribe="+item.subscribe
+		    let req = this.upFA+item.id_foto+"&subscribe="+item.subscribe
 		    this.$http.get(req).then(function (response) {
 		            this.getPhotos()
 		    },function (error){
@@ -33,6 +33,10 @@ var vue = new Vue({
 		    let req = this.selFA+this.idFA
 		    this.$http.get(req).then(function (response) {
 				this.photos = JSON.parse(response.data)
+/*				for (var p of this.photos) {
+					console.log('id='+p.id_foto)	
+				}
+				*/
 		    },function (error){
 				console.log(error);
 		    })			

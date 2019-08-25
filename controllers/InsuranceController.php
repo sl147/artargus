@@ -54,25 +54,21 @@ class InsuranceController
 	}
 
 	public function actionIndex() {
-		$meta['title']    = "Калькулятор автоцивілки";
-		$meta['keywords'] = "ОСАГО страхування цивільної відповідальності калькулятор автоцивілки автоцивілка";
-		$meta['descr']    = "Калькулятор розрахунку вартості страхування цивільної відповідальності";
-		$type             = 1;
-		$mass             = "калькулятор автоцивілки";
-		$res              = self:: smail($type, $mass);
-		$comment          = Insurance::getComment($type);
+		$meta    = Auxiliary:: getMeta("insurance");
+		$type    = 1;
+		$mass    = "калькулятор автоцивілки";
+		$res     = self:: smail($type, $mass);
+		$comment = Insurance::getComment($type);
 		require_once ('views/insurance/insurance.php');
 		return true;
 	}
 
 	public function actionAutosign () {
-		$meta['title']    = "АВТО НОМЕРА УКРАЇНИ";
-		$meta['keywords'] = "АВТОНОМЕР автомобільний номер";
-		$meta['descr']    = "взнати номера автомобілів по областях";
-		$type             = 2;
-		$mass             = "автономера";
-		$res              = self:: smail($type, $mass);
-	    $comment          = Insurance::getComment($type);				
+		$meta    = Auxiliary:: getMeta("autoNumber");
+		$type    = 2;
+		$mass    = "автономера";
+		$res     = self:: smail($type, $mass);
+	    $comment = Insurance::getComment($type);				
 		require_once ('views/insurance/autosign.php');
 		return true;
 	}
