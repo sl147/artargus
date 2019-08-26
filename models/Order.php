@@ -9,20 +9,15 @@ class Order
 	public static function saveOrderTab () {
 		$basket  = Basket::getBasket();
 		$orderid = Basket::getBasketId();
-		$db = Db::getConnection();
+		$db      = Db::getConnection();
 		foreach ($basket as $item) {
-			$id_tov    = $item['id'];
-			$kod_t     = $item['kod_t'];
-			$price     = $item['price'];
-			$quantity  = $item['q'];
-			$name      = $item['name'];
 			$sqlres = "INSERT INTO eOrdersTab (orderid,id_tov,kod_t,quantity,price) VALUES(:orderid,:id_tov,:kod_t,:quantity,:price)";
 			$res = $db -> prepare($sqlres);
 			$res -> bindParam(':orderid', $orderid, PDO::PARAM_STR);
-			$res -> bindParam(':id_tov',  $id_tov,  PDO::PARAM_STR);
-			$res -> bindParam(':kod_t',   $kod_t,   PDO::PARAM_STR);
-			$res -> bindParam(':quantity',$quantity,PDO::PARAM_STR);
-			$res -> bindParam(':price',   $price,   PDO::PARAM_STR);
+			$res -> bindParam(':id_tov',  $item['id'],  PDO::PARAM_STR);
+			$res -> bindParam(':kod_t',   $item['kod_t'],   PDO::PARAM_STR);
+			$res -> bindParam(':quantity',$item['q'],PDO::PARAM_STR);
+			$res -> bindParam(':price',   $item['price'],   PDO::PARAM_STR);
 			$res -> execute();
 		}
 		return $res;
@@ -54,7 +49,7 @@ class Order
 	public static function getOrderByClient ($id) {
 		$getOrders   = new classGetData('eOrders');
 		$result      = $getOrders->getDataFromTableByNameH(Auxiliary::getIntval($id),"id_Client");
-		$i= 0;
+		$i           = 0;
 		$getJobs     = new classGetData('job_status');
 		$getDelivery = new classGetData('job_status');
 		while ($row = $result->fetch()) {
@@ -88,38 +83,35 @@ class Order
 	}
 
 	public static function getOrderTabById($id) {
-			$orderTabList = [];
-			$db           = Db::getConnection();
-			$sql          = "SELECT * FROM eOrdersTab WHERE orderid='".Auxiliary::getIntval($id)."'";
-			$result       = $db -> query($sql);
-			$i            = 0;
+		$db     = Db::getConnection();
+		$sql    = "SELECT * FROM eOrdersTab WHERE orderid='".Auxiliary::getIntval($id)."'";
+		$result = $db -> query($sql);
+		$i      = 0;
 
-			while ($row = $result->fetch()) {
-				$orderTabList[$i]['nom']      = $i + 1;
-				$orderTabList[$i]['orderid']  = $row['orderid'];
-				$orderTabList[$i]['id_tov']   = $row['id_tov'];
-				$orderTabList[$i]['kod_t']    = $row['kod_t'];
-				$orderTabList[$i]['quantity']        = $row['quantity'];
-				$orderTabList[$i]['price']    = $row['price'];
-				$orderTabList[$i]['i']        = $i+1;
-				$orderTabList[$i]['suma']     = $row['price'] * $row['quantity'];
-				
-				$restov = $db -> query("SELECT * FROM ecatalog WHERE id=".$row['id_tov']);
-				$restov -> setFetchMode(PDO::FETCH_ASSOC);
-				$rowtov = $restov->fetch();
-				$nameGr = "FT".$rowtov['fullKod']."/";
-				$orderTabList[$i]['foto']    = $nameGr.$rowtov['foto'];
-				$orderTabList[$i]['name']    = $rowtov['name'];
-				$orderTabList[$i]['article'] = $rowtov['article'];
-				$orderTabList[$i]['kodCol']  = $rowtov['kodCol'];
+		while ($row = $result->fetch()) {
+			$orderTabList[$i]['nom']      = $i + 1;
+			$orderTabList[$i]['orderid']  = $row['orderid'];
+			$orderTabList[$i]['id_tov']   = $row['id_tov'];
+			$orderTabList[$i]['kod_t']    = $row['kod_t'];
+			$orderTabList[$i]['quantity'] = $row['quantity'];
+			$orderTabList[$i]['price']    = $row['price'];
+			$orderTabList[$i]['i']        = $i+1;
+			$orderTabList[$i]['suma']     = $row['price'] * $row['quantity'];
+			
+			$restov = $db -> query("SELECT * FROM ecatalog WHERE id=".$row['id_tov']);
+			$restov -> setFetchMode(PDO::FETCH_ASSOC);
+			$rowtov = $restov->fetch();
+			$nameGr = "FT".$rowtov['fullKod']."/";
+			$orderTabList[$i]['foto']    = $nameGr.$rowtov['foto'];
+			$orderTabList[$i]['name']    = $rowtov['name'];
+			$orderTabList[$i]['article'] = $rowtov['article'];
+			$orderTabList[$i]['kodCol']  = $rowtov['kodCol'];
 
-				$i++;						
-			}
-		
-			return $orderTabList;
+			$i++;						
+		}
+		return (isset($orderTabList)) ? $orderTabList : false;
 	}
 	public static function getOrderTabSum($orderTab) {
-		$tabSum = [];
 		$qq     = 0;
 		$suma   = 0;
 		foreach ($orderTab as $item) {
@@ -128,7 +120,7 @@ class Order
 		}
 		$tabSum['qq']   = $qq;
 		$tabSum['suma'] = $suma;
-		return $tabSum;
+		return (isset($tabSum)) ? $tabSum : false;
 	}
 
 	public static function getAllOrdersBySelect($date_begin,$date_ended,$jobSelect,$userSelect,$phoneSelect) {
@@ -212,10 +204,9 @@ class Order
 	}
 
 	public static function getAllOrders() {
-		$orderList = [];
-		$sql = "SELECT * FROM eOrders ORDER BY id_ord DESC";
-		$result = Db::select($sql);
-		$i= 0;
+		$sql         = "SELECT * FROM eOrders ORDER BY id_ord DESC";
+		$result      = Db::select($sql);
+		$i           = 0;
 		$getJobs     = new classGetData('job_status');
 		$getDelivery = new classGetData('deliveryFirm');
 		while ($row = $result->fetch()) {
@@ -240,16 +231,16 @@ class Order
 		}
 		unset($getJobs);
 		unset($getDelivery);
-		return $orderList;
+		return (isset($orderList)) ? $orderList : false;
 	}
 
 	public static function getAllOrderInJob($page) {
 		$page   = Auxiliary::getIntval($page);
-		$made        = 4;
-		$orderList   = [];
-		$offset      = ($page - 1) * self::SHOW_BY_DEFAULT;
-		$result      = Db::select("SELECT * FROM eOrders WHERE job < ".$made." ORDER BY id_ord DESC LIMIT ".self::SHOW_BY_DEFAULT." OFFSET ".$offset);
-		$i           = 0;
+		$made   = 4;
+		$i      = 0;
+		$offset = ($page - 1) * self::SHOW_BY_DEFAULT;
+		$result = Db::select("SELECT * FROM eOrders WHERE job < ".$made." ORDER BY id_ord DESC LIMIT ".self::SHOW_BY_DEFAULT." OFFSET ".$offset);
+		
 		$getJobs     = new classGetData('job_status');
 		$getDelivery = new classGetData('deliveryFirm');
 		while ($row = $result->fetch()) {
@@ -265,12 +256,11 @@ class Order
 		}
 		unset($getJobs);
 		unset($getDelivery);
-		return $orderList;
+		return (isset($orderList)) ? $orderList : false;
 	}
 
 	public static function getAllOrderByJob($job) {
 		$made = 4;
-		$orderList = [];
 		if ($job == $made) $sql = "SELECT * FROM eOrders WHERE job=".$job." ORDER BY id_ord DESC";
 		else $sql = "SELECT * FROM eOrders WHERE job <> ".$made." and job <> 5 ORDER BY id_ord DESC";
 		$result = Db::select($sql);
@@ -282,24 +272,24 @@ class Order
 			$orderList[$i]['jobsId']  = $row['job'];
 			$orderList[$i]['deliver'] = $getDelivery->getDataFromTableById($row['deliver'])['name'];
 			$orderList[$i]['status']  = $getJobs->getDataFromTableById($row['job'])['name'];
-			$orderTab = self::getOrderTabById($row['orderid']);
-			$orderSum = self::getOrderTabSum($orderTab);
+			$orderTab                 = self::getOrderTabById($row['orderid']);
+			$orderSum                 = self::getOrderTabSum($orderTab);
 			$orderList[$i]['qq']      = $orderSum['qq'];
 			$orderList[$i]['suma']    = $orderSum['suma'];
 			$i++;						
 		}
 		unset($getJobs);
 		unset($getDelivery);
-		return $orderList;
+		return (isset($orderList)) ? $orderList : false;
 	}
 
 	public static function edit ($id,$job) {
-		$db = Db::getConnection();
+		$db  = Db::getConnection();
 		$sql = "UPDATE eOrders SET job=:job WHERE id_ord=$id";
-		$result = $db -> prepare($sql);
-		$result -> bindParam(':job', $job, PDO::PARAM_STR);
+		$res = $db -> prepare($sql);
+		$res -> bindParam(':job', $job, PDO::PARAM_STR);
 		
-		return $result -> execute();			
+		return $res -> execute();			
 	}
 }
 ?>

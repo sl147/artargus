@@ -33,13 +33,14 @@ class Job
 	}
 
 	public static function getJobsOne($id) {
-		$id = Auxiliary::getIntval($id);
-		$result = Db::select("SELECT * FROM photoInAlbum WHERE id_album='".$id."'");
-		$i= 0;
+		$id   = Auxiliary::getIntval($id);
+		$res  = Db::select("SELECT * FROM photoInAlbum WHERE id_album='".$id."'");
+		$i    = 0;
+		$path = '/album/'.$id.'/';
 		while ($row = $result->fetch()) {
 			$jobItem[]          = $row;
-			$jobItem[$i]['fn']  = '/album/'.$id.'/'.$row['fotoName'];
-			$jobItem[$i]['fns'] = '/album/'.$id.'/'.$row['fotoNameS'];
+			$jobItem[$i]['fn']  = $path.$row['fotoName'];
+			$jobItem[$i]['fns'] = $path.$row['fotoNameS'];
 			$i++;
 		}
 		return (isset($jobItem)) ? $jobItem : false;

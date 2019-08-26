@@ -93,27 +93,25 @@ class Auxiliary
     return strtr($string, $converter);		
 	}
 
-	public static function editMetaTags($id,$url_name,$title,$descr,$keywords) {
-		$sql = "UPDATE meta_tags SET url_name=:url_name,title=:title,descr=:descr,keywords=:keywords WHERE id=$id";
+	private static function saveMT($url_name,$title,$descr,$keywords,$sql) {
 		$result = Db::getConnection() -> prepare($sql);
 		$result -> bindParam(':url_name', $url_name, PDO::PARAM_STR);
 		$result -> bindParam(':title',   $title,     PDO::PARAM_STR);
 		$result -> bindParam(':descr',   $descr,     PDO::PARAM_STR);
 		$result -> bindParam(':keywords',$keywords,  PDO::PARAM_STR);	
-		return $result -> execute();			
+		return $result -> execute();
+	}
+
+	public static function editMetaTags($id,$url_name,$title,$descr,$keywords) {
+		$sql = "UPDATE meta_tags SET url_name=:url_name,title=:title,descr=:descr,keywords=:keywords WHERE id=$id";
+		$r = self::saveMT($url_name,$title,$descr,$keywords,$sql);	
 	}
 	
 	public static function saveMTags ($url_name,$title,$descr,$keywords) 
 	{
 		$sql = "INSERT INTO meta_tags (url_name,title,descr,keywords)
 		 VALUES(:url_name,:title,:descr,:keywords)";
-		$result = Db::getConnection() -> prepare($sql);
-		$result -> bindParam(':url_name', $url_name, PDO::PARAM_STR);
-		$result -> bindParam(':title',    $title,    PDO::PARAM_STR);
-		$result -> bindParam(':descr',    $descr,    PDO::PARAM_STR);
-		$result -> bindParam(':keywords', $keywords, PDO::PARAM_STR);
-		
-		return $result -> execute();			
+		$r = self::saveMT($url_name,$title,$descr,$keywords,$sql);			
 	}
 
 	public static function getContent($alias) {
@@ -240,8 +238,7 @@ class Auxiliary
     public static function savePhoto($nameFile,$pathdir) {
         $res      = self::makeDir($pathdir);
         $fns      = $pathdir.$nameFile;
-        $fnSmal   = $pathdir."s".'_'.$nameFile;	
-        echo "fns:$fns<br>";		
+        $fnSmal   = $pathdir."s".'_'.$nameFile;			
         move_uploaded_file ($_FILES['file'] ['tmp_name'],$fns);
 		$res = self::saveImg($fns, $fns, 600);
 		$res = self::saveImg($fns, $fnSmal, 150);

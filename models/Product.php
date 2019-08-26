@@ -33,111 +33,86 @@ class Product
 		return (isset($findList)) ? $findList : false;			
 	}
 
-	public static function getCategoryList() 	{
+	public static function getCategoryList() {
 		$result = Db::getConnection() -> query("SELECT id, name,kod_t FROM ecatalog WHERE parent='0' ORDER BY name");
-		$i= 0;
 		while ($row = $result->fetch()) {
-			$categoriesList[$i]['id']    = $row['id'];
-			$categoriesList[$i]['kod_t'] = $row['kod_t'];
-			$categoriesList[$i]['name']  = $row['name'];
-			$i++;
+			$categoriesList[]    = $row;
 		}
 		return (isset($categoriesList)) ? $categoriesList : false;
 	}
 	
 	public static function getLatestGrups($gr) {
-		if (intval($gr)) {
-			$result = Db::getConnection() -> query("SELECT * FROM ecatalog WHERE parent='".$gr."' ORDER BY name");
-			$i= 0;
-			while ($row = $result->fetch()) {
-				$GrupList[$i]['id']    = $row['id'];
-				$GrupList[$i]['name']  = $row['name'];
-				$GrupList[$i]['foto']  = $row['foto'];
-				$GrupList[$i]['foto1'] = FT.$row['foto'];
-				$GrupList[$i]['kod_t'] = $row['kod_t'];
-				$i++;
-			}
-			return (isset($GrupList)) ? $GrupList : false;
+		$gr = Auxiliary::getIntval($gr);
+		$result = Db::getConnection() -> query("SELECT * FROM ecatalog WHERE parent='".$gr."' ORDER BY name");
+		$i= 0;
+		while ($row = $result->fetch()) {
+			$GrupList[]    = $row;
+			$GrupList[$i]['foto1'] = FT.$row['foto'];
+			$i++;
 		}
+		return (isset($GrupList)) ? $GrupList : false;
 	}
 	
 	public static function getLatestProducts($id,$page = 1) {
-			if ( (intval($id)) && intval($page) ) {
-			$offset = ($page - 1) * self::SHOW_BY_DEFAULT;
-			$sql = "SELECT * FROM ecatalog WHERE parent=$id ORDER BY countTov DESC LIMIT ".self::SHOW_BY_DEFAULT." OFFSET $offset";
-			$result = Db::getConnection() -> query($sql);
-			$i= 0;
-			while ($row = $result->fetch()) {
-				$productList[$i]['id']    = $row['id'];
-				$productList[$i]['name']  = $row['name'];
-				$productList[$i]['kod_t'] = $row['kod_t'];
-				$productList[$i]['foto']  = $row['foto'];
-				$productList[$i]['fotoS']  = $row['fotoS'];
-/*				$FK = "";
-				$fCod = explode("/", $row['fullKod']);
-				for ($x=2; $x<count($fCod); $x++) $FK .="/".$fCod[$x];
-					echo $row['name']."  FK = $FK<br>";*/
-				if ($row['fotoS']) $productList[$i]['fotoPath']  = "/FT".$row['fullKod']."/".$row['foto'];
-				else $productList[$i]['fotoPath']  = "/image/noImage.jpg";
-				//echo "/FT".$row['fullKod']."/".$row['foto']."    ".$productList[$i]['fotoPath']."<br>"; 
-				$productList[$i]['countTov']  = $row['countTov'];
-				$productList[$i]['fullKod']  = $row['fullKod'];
-				$productList[$i]['article']  = $row['article'];
-				$productList[$i]['descr'] = $row['descr'];
-				$productList[$i]['price']  = $row['price'];
-				$productList[$i]['kodCol']  = $row['kodCol'];
+		$id   = Auxiliary::getIntval($id);
+		$page = Auxiliary::getIntval($page);
+		$offset = ($page - 1) * self::SHOW_BY_DEFAULT;
+		$sql = "SELECT * FROM ecatalog WHERE parent=$id ORDER BY countTov DESC LIMIT ".self::SHOW_BY_DEFAULT." OFFSET $offset";
+		$result = Db::getConnection() -> query($sql);
+		$i= 0;
+		while ($row = $result->fetch()) {
+			$productList[$i]  = $row;
+			if ($row['fotoS']) $productList[$i]['fotoPath']  = "/FT".$row['fullKod']."/".$row['foto'];
+			else $productList[$i]['fotoPath']  = "/image/noImage.jpg";
 
-				$i++;
-			}
-			return (isset($productList)) ? $productList : false;
+			$i++;
 		}
+		return (isset($productList)) ? $productList : false;
 	}
 
 	public static function getProductById($id) 	{
-		if (intval($id)) {
-			$result = Db::getConnection() -> query("SELECT * FROM ecatalog WHERE id=".$id);
-			$result -> setFetchMode(PDO::FETCH_ASSOC);
-			$productItem = $result->fetch();
-			$productItem['fotLIt'] = '/FT'.$productItem['fullKod']."/".$productItem['foto'];
-			$productItem['fotLGr'] = '/FT/'.$productItem['foto'];
-			if ($productItem['brand']) {
-				$getEmaker = new classGetData('emaker');
-				$brand     = $getEmaker->getDataFromTableById($productItem['brand']);
-				$productItem['brandId']   = $brand['id'];
-				$productItem['brandName'] = $brand['name'];
-				unset($getEmaker);
-			}
-			else {
-				$productItem['brandId']   = '';
-				$productItem['brandName'] = '';				
-			}
-			if (!$productItem['descr']) {
-				$parItem = self::getGroupById($productItem['parent']);
-				$productItem['descrParent'] = $parItem['descr'];
-				$productItem['fotLGr'] = $parItem['foto1'];
-			}
-
-			return (isset($productItem)) ? $productItem : false;
+		$id   = Auxiliary::getIntval($id);
+		$result = Db::getConnection() -> query("SELECT * FROM ecatalog WHERE id=".$id);
+		$result -> setFetchMode(PDO::FETCH_ASSOC);
+		$productItem = $result->fetch();
+		$productItem['fotLIt'] = '/FT'.$productItem['fullKod']."/".$productItem['foto'];
+		$productItem['fotLGr'] = '/FT/'.$productItem['foto'];
+		if ($productItem['brand']) {
+			$getEmaker = new classGetData('emaker');
+			$brand     = $getEmaker->getDataFromTableById($productItem['brand']);
+			$productItem['brandId']   = $brand['id'];
+			$productItem['brandName'] = $brand['name'];
+			unset($getEmaker);
 		}
+		else {
+			$productItem['brandId']   = '';
+			$productItem['brandName'] = '';				
+		}
+		if (!$productItem['descr']) {
+			$parItem = self::getGroupById($productItem['parent']);
+			$productItem['descrParent'] = $parItem['descr'];
+			$productItem['fotLGr'] = $parItem['foto1'];
+		}
+
+		return (isset($productItem)) ? $productItem : false;
 	}
 
 	public static function getGroupById($id) {
-		if (intval($id)) {	
-			$result = Db::getConnection() -> query("SELECT * FROM ecatalog WHERE kod_t=".$id);
-			$result -> setFetchMode(PDO::FETCH_ASSOC);
-			$groupItem = $result->fetch();
-			$groupItem['foto1']     = FT.$groupItem['foto'];
-			$groupItem['brandId']   = "";
-			$groupItem['brandName'] = "";
-			if ($groupItem['brand']) {
-				$getEmaker = new classGetData('emaker');
-				$brand     = $getEmaker->getDataFromTableById($groupItem['brand']);
-				$groupItem['brandId']   = $brand['id'];
-				$groupItem['brandName'] = $brand['name'];
-				unset($getEmaker);
-			}
-			return (isset($groupItem)) ? $groupItem : false;
+		$id   = Auxiliary::getIntval($id);	
+		$result = Db::getConnection() -> query("SELECT * FROM ecatalog WHERE kod_t=".$id);
+		$result -> setFetchMode(PDO::FETCH_ASSOC);
+		$groupItem = $result->fetch();
+		$groupItem['foto1']     = FT.$groupItem['foto'];
+		$groupItem['brandId']   = "";
+		$groupItem['brandName'] = "";
+		if ($groupItem['brand']) {
+			$getEmaker = new classGetData('emaker');
+			$brand     = $getEmaker->getDataFromTableById($groupItem['brand']);
+			$groupItem['brandId']   = $brand['id'];
+			$groupItem['brandName'] = $brand['name'];
+			unset($getEmaker);
 		}
+		return (isset($groupItem)) ? $groupItem : false;
 	}
 
 	public static function delFoto($id) {
@@ -235,8 +210,7 @@ class Product
 
 	public static function saveAddGroup($name,$parent) {
 		$db  = self::db();
-		$sql = "INSERT INTO ecatalog (name,parent)
-		 VALUES(:name, :parent)";
+		$sql = "INSERT INTO ecatalog (name,parent) VALUES(:name, :parent)";
 		$result = $db -> prepare($sql);
 		$result -> bindParam(':name',   $name,   PDO::PARAM_STR);
 		$result -> bindParam(':parent', $parent, PDO::PARAM_STR);

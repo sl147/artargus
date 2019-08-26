@@ -77,8 +77,7 @@ class AuxiliaryController
 			$keywords = Auxiliary::filterTXT('post', 'keywords');
 
 			$result   = Auxiliary::saveMTags($url_name,$title,$descr,$keywords);
-			$loc="Location:".$_SERVER['HTTP_REFERER'];
-			header( $loc);
+			header("Location: /metaTags");
 		}
 		require_once ('views/auxiliary/addMTags.php');
 		return true; 
@@ -93,8 +92,7 @@ class AuxiliaryController
 			$keywords = Auxiliary::filterTXT('post', 'keywords');
 
 			$res      = Auxiliary::editMetaTags($id,$url_name,$title,$descr,$keywords);
-			$loc="Location:".$_SERVER['HTTP_REFERER'];
-			header( $loc);
+			header("Location: /metaTags");
 		}
 		$getData  = new classGetData('meta_tags');
 		$MTOne   = $getData->getDataFromTableById($id);

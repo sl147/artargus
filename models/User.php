@@ -81,10 +81,8 @@ class User
 	}
 
 	public static function getUserById ($id) {
-		$getData = new classGetData('friends_MVC');
-		$list    = $getData->getDataFromTableById($id);
-		unset($getData);		
-		return $list;		
+		$getData = new classGetData('friends_MVC');		
+		return $getData->getDataFromTableById($id);		
 	}
 
 	public static function isUser ($id) {
@@ -100,7 +98,6 @@ class User
 	}
 
 	public static function getClients($Cl) {
-		$ClientList = [];
 		$sql = "SELECT * FROM friends_MVC WHERE admin = $Cl ORDER BY id DESC ";
 		$result = Db::select($sql);
 		$i= 0;
@@ -120,20 +117,19 @@ class User
 		unset($getClients);
 		unset($getManager);
 		unset($getDeliver);
-		return $ClientList;		
+		return (isset($ClientList)) ? $ClientList : false;		
 	}
 
 	public static function getAllClients() {
-		$ClientList = [];
-		$sql        = "SELECT * FROM friends_MVC WHERE admin = 1 ORDER BY name ";
-		$result     = Db::select($sql);
-		$i= 1;
+		$sql    = "SELECT * FROM friends_MVC WHERE admin = 1 ORDER BY name ";
+		$result = Db::select($sql);
+		$i      = 1;
 		while ($row = $result->fetch()) {
 			$ClientList[$i]['id']   = $row['id'];
 			$ClientList[$i]['name'] = $row['name']." ".$row['surname'];
 			$i++;
 		}
-		return $ClientList;		
+		return (isset($ClientList)) ? $ClientList : false;		
 	}
 
 	public static function changeManager ($id,$idManager) {
@@ -144,10 +140,8 @@ class User
 	}	
 
 	public static function changeRole ($id,$idRole) {
-		$sql = "UPDATE friends_MVC SET admin=:idRole WHERE id=$id";
-		$result = DB::selectBind ($sql, ':idRole', $idRole);
-		
-		return $result;			
+		$sql    = "UPDATE friends_MVC SET admin=:idRole WHERE id=$id";		
+		return DB::selectBind ($sql, ':idRole', $idRole);			
 	}
 }	
 ?>

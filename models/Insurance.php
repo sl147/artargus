@@ -15,28 +15,26 @@ class Insurance
 	}
 
 	public static function updateVueTZ($id, $type, $name, $k1) {
-		if (intval($id)) {
-			$db     = self::db();
-			$sql    = "UPDATE in_type SET type=:type, name=:name, k1=:k1 WHERE id=$id";
-			$result = $db -> prepare($sql);
-			$result -> bindParam(':type', $type, PDO::PARAM_STR);
-			$result -> bindParam(':name', $name, PDO::PARAM_STR);
-			$result -> bindParam(':k1',   $k1,   PDO::PARAM_STR);
-			
-			return $result -> execute();
-		}			
+		$id     = Auxiliary::getIntval($id);
+		$db     = self::db();
+		$sql    = "UPDATE in_type SET type=:type, name=:name, k1=:k1 WHERE id=$id";
+		$result = $db -> prepare($sql);
+		$result -> bindParam(':type', $type, PDO::PARAM_STR);
+		$result -> bindParam(':name', $name, PDO::PARAM_STR);
+		$result -> bindParam(':k1',   $k1,   PDO::PARAM_STR);
+		
+		return $result -> execute();			
 	}
 
 	public static function updateVueReestr ($id, $name, $k2) {
-		if (intval($id)) {
-			$db     = self::db();
-			$sql    = "UPDATE in_chek SET name=:name, k2=:k2 WHERE id=$id";
-			$result = $db -> prepare($sql);
-			$result -> bindParam(':name', $name, PDO::PARAM_STR);
-			$result -> bindParam(':k2',   $k2,   PDO::PARAM_STR);
-			
-			return $result -> execute();
-		}		
+		$id     = Auxiliary::getIntval($id);
+		$db     = self::db();
+		$sql    = "UPDATE in_chek SET name=:name, k2=:k2 WHERE id=$id";
+		$result = $db -> prepare($sql);
+		$result -> bindParam(':name', $name, PDO::PARAM_STR);
+		$result -> bindParam(':k2',   $k2,   PDO::PARAM_STR);
+		
+		return $result -> execute();		
 	}	
 
 	public static function addVueTZ ($type, $name, $k1) {
@@ -63,38 +61,38 @@ class Insurance
 	}
 
 	public static function getCalculatorType($type = 1) {
-		if (intval($type)) {	
-			$db  = Db::getConnection();
-			$sql = "SELECT * FROM typeCalculator WHERE id=$type";
-			$res = $db  -> query($sql);
-			$row = $res->fetch();
-			return $row['name'];		
-		}
+		$type = Auxiliary::getIntval($type);	
+		$db   = Db::getConnection();
+		$sql  = "SELECT * FROM typeCalculator WHERE id=$type";
+		$res  = $db  -> query($sql);
+		$row  = $res->fetch();
+		return $row['name'];
 	}
 
 	public static function getCalculatorAll() {
-			$sql      = "SELECT * FROM typeCalculator";
-			$result   = Db::getConnection() -> query($sql);
-			while ($row = $result->fetch()) {
-				$calcType[]   = $row;
-			}
-			return (isset($calcType)) ? $calcType : false;
-	}
-	public static function getComment($type = 1) {
-		if ($type) {	
-			$sql     = "SELECT * FROM CommentCalculators WHERE (type=$type) && (active=1)";
-			$result  = Db::getConnection() -> query($sql);
-			while ($row = $result->fetch()) {
-				$comItem[]   = $row;
-			}
-			return (isset($comItem)) ? $comItem : false;
+		$sql      = "SELECT * FROM typeCalculator";
+		$result   = Db::getConnection() -> query($sql);
+		while ($row = $result->fetch()) {
+			$calcType[]   = $row;
 		}
+		return (isset($calcType)) ? $calcType : false;
 	}
 
-	public static function getComeToPlugin($page) {	
-		$offset   = ($page - 1) * self::SHOWCOMMENT_BY_DEFAULT;
-		$sql      = "SELECT * FROM ComeToPlugin ORDER BY id DESC LIMIT ".self::SHOWCOMMENT_BY_DEFAULT." OFFSET $offset";
-		$result   =  Db::getConnection() -> query($sql);
+	public static function getComment($type = 1) {
+		$type   = Auxiliary::getIntval($type);	
+		$sql    = "SELECT * FROM CommentCalculators WHERE (type=$type) && (active=1)";
+		$result = Db::getConnection() -> query($sql);
+		while ($row = $result->fetch()) {
+			$comItem[]   = $row;
+		}
+		return (isset($comItem)) ? $comItem : false;
+	}
+
+	public static function getComeToPlugin($page) {
+		$page   = Auxiliary::getIntval($page);	
+		$offset = ($page - 1) * self::SHOWCOMMENT_BY_DEFAULT;
+		$sql    = "SELECT * FROM ComeToPlugin ORDER BY id DESC LIMIT ".self::SHOWCOMMENT_BY_DEFAULT." OFFSET $offset";
+		$result =  Db::getConnection() -> query($sql);
 		while ($row = $result->fetch()) {
 			$list[]   = $row;
 		}
@@ -102,15 +100,14 @@ class Insurance
 	}
 
 	public static function getAllComment($page = 1) {
-		if (intval($page)) {	
-			$offset   = ($page - 1) * self::SHOWCOMMENT_BY_DEFAULT;
-			$sql      = "SELECT Comment.id, Comment.type, Comment.text, Comment.nik, Comment.ip, Comment.active, type.name FROM CommentCalculators AS Comment LEFT JOIN typeCalculator AS type ON Comment.type = type.id ORDER BY Comment.id DESC LIMIT ".self::SHOWCOMMENT_BY_DEFAULT." OFFSET $offset";
-			$result = Db::getConnection() -> query($sql);
-			while ($row = $result->fetch()) {
-				$comments[]   = $row;
-			}
-			return (isset($comments)) ? $comments : false;
+		$page   = Auxiliary::getIntval($page);	
+		$offset = ($page - 1) * self::SHOWCOMMENT_BY_DEFAULT;
+		$sql    = "SELECT Comment.id, Comment.type, Comment.text, Comment.nik, Comment.ip, Comment.active, type.name FROM CommentCalculators AS Comment LEFT JOIN typeCalculator AS type ON Comment.type = type.id ORDER BY Comment.id DESC LIMIT ".self::SHOWCOMMENT_BY_DEFAULT." OFFSET $offset";
+		$result = Db::getConnection() -> query($sql);
+		while ($row = $result->fetch()) {
+			$comments[]   = $row;
 		}
+		return (isset($comments)) ? $comments : false;
 	}
 
 	public static function saveComment ($type,$nik,$text,$ip)	{
