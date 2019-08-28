@@ -39,13 +39,14 @@ class InsuranceController
 		$subject = $massage = "перехід на ".$mass;		
 		$sendCl  = new SendMail(); 
 		$send    = $sendCl->sendMail($subject,"sl147@ukr.net",$massage);
-		
-		if(isset($_POST['submit'])) {			
+
+		if(isset($_POST['submit'])) {
+			$typeC   = new classGetData('typeCalculator');			
 			$nik     = Auxiliary::filterTXT('post', 'nik_com');
 			$text    = Auxiliary::filterTXT('post', 'txt_com');
 	        $ip      = $_SERVER['REMOTE_ADDR'];
-	        $result  = Insurance::saveComment($type,$nik,$text,$ip);			
-			$subject = "Новий коментар ".Insurance::getCalculatorType($type)." ip=".$ip;
+	        $result  = Insurance::saveComment($type,$nik,$text,$ip);
+			$subject = "Новий коментар ".$typeC->getDataFromTableById($type)['name']." ip=".$ip;
 			$to      = "sl147@ukr.net";
 			$massage = $subject." ip=".$ip."  з HTTP_REFERER ".$_SERVER['HTTP_REFERER']."\r\n"."  з REMOTE_ADDR ".$_SERVER['REMOTE_ADDR']."\r\n";
 			$sendCl  = new SendMail(); 
@@ -96,7 +97,9 @@ class InsuranceController
 	public function actionComeToPlugin($page = 1) {
 		$page       = Auxiliary::getIntval($page);
 		$title      = "переходи на плагін";
-		$lists      = Insurance::getComeToPlugin($page);
+		$gd   = new classGetData('ComeToPlugin');
+		$lists = $gd->getDataFromTableOrderPage(Insurance::SHOWCOMMENT_BY_DEFAULT,$page,'id');
+		//$lists      = Insurance::getComeToPlugin($page);
         $total      = Auxiliary::getTotal('ComeToPlugin','1','id','id',1);
         $pagination = Auxiliary::getPagination ($total,Insurance::SHOWCOMMENT_BY_DEFAULT, $page);
 		require_once ('views/insurance/insuranceComeToPlugin.php');

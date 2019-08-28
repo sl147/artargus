@@ -5,7 +5,7 @@
 class Insurance
 {
 	
-	const SHOWCOMMENT_BY_DEFAULT = 10;
+	const SHOWCOMMENT_BY_DEFAULT = 3;
 
 	private static function db() {
 		$params = include ('../config/db_params.php');
@@ -60,24 +60,6 @@ class Insurance
 		return $result -> execute();;			
 	}
 
-	public static function getCalculatorType($type = 1) {
-		$type = Auxiliary::getIntval($type);	
-		$db   = Db::getConnection();
-		$sql  = "SELECT * FROM typeCalculator WHERE id=$type";
-		$res  = $db  -> query($sql);
-		$row  = $res->fetch();
-		return $row['name'];
-	}
-
-	public static function getCalculatorAll() {
-		$sql      = "SELECT * FROM typeCalculator";
-		$result   = Db::getConnection() -> query($sql);
-		while ($row = $result->fetch()) {
-			$calcType[]   = $row;
-		}
-		return (isset($calcType)) ? $calcType : false;
-	}
-
 	public static function getComment($type = 1) {
 		$type   = Auxiliary::getIntval($type);	
 		$sql    = "SELECT * FROM CommentCalculators WHERE (type=$type) && (active=1)";
@@ -86,17 +68,6 @@ class Insurance
 			$comItem[]   = $row;
 		}
 		return (isset($comItem)) ? $comItem : false;
-	}
-
-	public static function getComeToPlugin($page) {
-		$page   = Auxiliary::getIntval($page);	
-		$offset = ($page - 1) * self::SHOWCOMMENT_BY_DEFAULT;
-		$sql    = "SELECT * FROM ComeToPlugin ORDER BY id DESC LIMIT ".self::SHOWCOMMENT_BY_DEFAULT." OFFSET $offset";
-		$result =  Db::getConnection() -> query($sql);
-		while ($row = $result->fetch()) {
-			$list[]   = $row;
-		}
-		return (isset($list)) ? $list : false;
 	}
 
 	public static function getAllComment($page = 1) {

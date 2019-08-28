@@ -57,7 +57,7 @@ var vue_app = new Vue({
 			})			
 		},		
 		getAll: function() {
-			//console.log('here;'+this.select)
+			console.log('here;'+this.select)
 			this.$http.get(this.select).then(function (response) {
 				this.elements = JSON.parse(response.data)			
 			},function (error){
@@ -67,6 +67,7 @@ var vue_app = new Vue({
 	},
 	created: function() {
 		this.getAll()
+		console.log('hhhheeee')
 	}	
   })
 })
