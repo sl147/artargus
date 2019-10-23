@@ -56,29 +56,23 @@ class InsuranceController
 
 	public function actionIndex() {
 		$meta    = Auxiliary:: getMeta("insurance");
-		$type    = 1;
-		$mass    = "калькулятор автоцивілки";
-		$res     = self:: smail($type, $mass);
-		$comment = Insurance::getComment($type);
+		$res     = self:: smail(1, "калькулятор автоцивілки");
+		$comment = Insurance::getComment(1);
 		require_once ('views/insurance/insurance.php');
 		return true;
 	}
 
 	public function actionAutosign () {
 		$meta    = Auxiliary:: getMeta("autoNumber");
-		$type    = 2;
-		$mass    = "автономера";
-		$res     = self:: smail($type, $mass);
-	    $comment = Insurance::getComment($type);				
+		$res     = self:: smail(2, "автономера");
+	    $comment = Insurance::getComment(2);				
 		require_once ('views/insurance/autosign.php');
 		return true;
 	}
 
 	public function actionPlugin($lang="en") {
-		$type    = 3;
-		$mass    = "плагін";
-		$res     = self:: smail($type, $mass);
-		$comment = Insurance::getComment($type);
+		$res     = self:: smail(3, "плагін");
+		$comment = Insurance::getComment(3);
 		$ip      = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '';
 		$ref     = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
 		$result  = Insurance::saveComeToPlugin($ref,$ip);
@@ -99,7 +93,6 @@ class InsuranceController
 		$title      = "переходи на плагін";
 		$gd   = new classGetData('ComeToPlugin');
 		$lists = $gd->getDataFromTableOrderPage(Insurance::SHOWCOMMENT_BY_DEFAULT,$page,'id');
-		//$lists      = Insurance::getComeToPlugin($page);
         $total      = Auxiliary::getTotal('ComeToPlugin','1','id','id',1);
         $pagination = Auxiliary::getPagination ($total,Insurance::SHOWCOMMENT_BY_DEFAULT, $page);
 		require_once ('views/insurance/insuranceComeToPlugin.php');

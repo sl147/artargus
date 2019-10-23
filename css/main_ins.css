@@ -14,14 +14,37 @@ select {
   width: 100%;
  height: auto;
 }
+
+ .authCalc
+ {
+   background-color: #F5FFFA;
+
+   padding: 10px;
+   margin: 58px auto;
+   opacity:0.85;
+   border-radius: 20px;
+   font-size: 15px;
+ }
+ .authCalc label
+ {
+  display: block;
+  width:200px
+  float: left;
+ }
+ 
+ .authCalc div
+ {
+  margin-bottom: 7px;
+ }
+
  .auth {
    background-color: #F5FFFA;
    border: 1px solid black;
-   padding: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
    opacity:0.8;
    border-radius: 20px;
    font-size: 15px;
-   margin-top: 5%;
  }
 
  .auth select  {

@@ -15,7 +15,6 @@ class Insurance
 	}
 
 	public static function updateVueTZ($id, $type, $name, $k1) {
-		$id     = Auxiliary::getIntval($id);
 		$db     = self::db();
 		$sql    = "UPDATE in_type SET type=:type, name=:name, k1=:k1 WHERE id=$id";
 		$result = $db -> prepare($sql);
@@ -27,7 +26,6 @@ class Insurance
 	}
 
 	public static function updateVueReestr ($id, $name, $k2) {
-		$id     = Auxiliary::getIntval($id);
 		$db     = self::db();
 		$sql    = "UPDATE in_chek SET name=:name, k2=:k2 WHERE id=$id";
 		$result = $db -> prepare($sql);

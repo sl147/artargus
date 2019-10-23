@@ -37,7 +37,7 @@ class Job
 		$res  = Db::select("SELECT * FROM photoInAlbum WHERE id_album='".$id."'");
 		$i    = 0;
 		$path = '/album/'.$id.'/';
-		while ($row = $result->fetch()) {
+		while ($row = $res->fetch()) {
 			$jobItem[]          = $row;
 			$jobItem[$i]['fn']  = $path.$row['fotoName'];
 			$jobItem[$i]['fns'] = $path.$row['fotoNameS'];

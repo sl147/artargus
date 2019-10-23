@@ -17,7 +17,7 @@ class AuxiliaryController
 		return true;
 	}
 
-	public function actionTypesCalcukator() {
+	public function actionTypesCalculator() {
 		$t = self::views2el('typeCalculator',"Редагування типів калькуляторів");
 		return true;
 	}

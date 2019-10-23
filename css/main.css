@@ -28,6 +28,10 @@ input {
 padding-left: 3px;
 height: 30px;
 }
+select {
+padding-left: 3px;
+height: 30px;
+}
 td {
 vertical-align: middle !important;
 padding-left: 4px;
@@ -56,6 +60,12 @@ padding-top:10px;
 .faimg {
   width: 100px;
   height: auto;
+}
+
+.calcmain {
+  margin-top: 20px;
+  font-size: 16px;
+  color: blue; 
 }
 
 .reklPicture {
@@ -349,6 +359,12 @@ width: 100%;
 
 .text-menu { 
 text-transform: uppercase;
+font-size: 12px;
+width: 100%;
+margin: 0 auto;
+}
+
+.text-menu-admin {
 font-size: 12px;
 width: 100%;
 margin: 0 auto;

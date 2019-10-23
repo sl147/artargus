@@ -6,15 +6,7 @@
 				<div class="row">
 					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-0"></div>
 					<div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
-						  <div class='reklPicture'>
-						    <a href='https://artargus.in.ua' target='_blank'>
-						      <img  class="argusImg" src='/image/art.jpg' alt='товари для художників' title='все для художників' border='2'>
-						    </a><br><br>
-						  </div>
-						  <div>
-						  	<a href="/autosign" class="btn btn-primary btn-block">Авто номера</a>
-						  	<a href="/insurance" class="btn btn-primary btn-block">Калькулятор автоцивілки</a>
-						  </div>
+						<?php include 'views/insurance/insLeftSide.php';?>
 					</div>
 					<div class="col-lg-1 col-md-1 col-sm-0 col-xs-0"></div>
 					<div class='auth col-lg-4 col-md-4 col-sm-10 col-xs-12'>		
@@ -29,14 +21,10 @@
 
 						<span>код регіону</span><br>
 						<select v-model="regionKod">
-<!-- 							<option v-for="option in options_region" v-bind:value="option.value">
-								{{ option.value }}
-							</option> -->
 							<option v-for="option in symbols" v-bind:value="option">
 								{{ option }}
 							</option>							
 						</select><br><br>
-
 
 						<div class="text-center var"> {{ regView }}</div> 
 						<div class="text-center var"> {{ nameView }}</div> 

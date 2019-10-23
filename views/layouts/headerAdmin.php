@@ -59,13 +59,13 @@
 				<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
 					<div class="btn-menu btn-group btn-group-justified" role="group" aria-label="...">
 						<div class="btn-group" role="group">
-							<a href="/" title="Головна"><button type="button" class="text-menu btn btn-danger">Головна</button></a>
+							<a href="/" title="Головна"><button type="button" class="text-menu-admin-admin btn btn-danger">Головна</button></a>
 						</div>
 						<div class="btn-group" role="group">
-							<a href="/admin" title="адмін"><button type="button" class="text-menu btn btn-danger">адмін</button></a>
+							<a href="/admin" title="адмін"><button type="button" class="text-menu-admin btn btn-danger">адмін</button></a>
 						</div>
 						<div class="btn-group btn-group-justified">
-							<button type="button" data-toggle="dropdown" class="text-menu btn btn-primary dropdown-toggle">клієнти<span class="caret"></span></button>
+							<button type="button" data-toggle="dropdown" class="text-menu-admin btn btn-primary dropdown-toggle">клієнти<span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li><a href="/selClient/" title="вибір клієнтів">замовлення клієнтів</a></li>
 								<li><a href="menegFriends" title="вибір клієнтів">привязка клієнтів</a></li>
@@ -76,7 +76,7 @@
 						</div>
 
 						<div class="btn-group btn-group-justified">
-							<button type="button" data-toggle="dropdown" class="text-menu btn btn-primary dropdown-toggle">товар <span class="caret"></span></button>
+							<button type="button" data-toggle="dropdown" class="text-menu-admin btn btn-primary dropdown-toggle">товар <span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li><a href="/editGroup/" title="редагування груп товару">редагування груп товару</a></li>
 								<li><a href="/editProducts/" title="редагування товару">редагування товару</a></li>
@@ -87,19 +87,47 @@
 						</div>
 
 						<div class="btn-group btn-group-justified">
-							<button type="button" data-toggle="dropdown" class="text-menu btn btn-primary dropdown-toggle">Калькулятор<span class="caret"></span></button>
+							<button type="button" data-toggle="dropdown" class="text-menu-admin btn btn-primary dropdown-toggle">редагування</button>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="/typescalcukator" title="редагування видів калькуляторів">види калькуляторів</a>
+									<a href="/typescalculator" title="редагування видів калькуляторів">
+										види калькуляторів
+									</a>
 								</li>
 								<li>
-									<a href="/insuranceType" title="редагування типів ТЗ">типи ТЗ</a>
+									<a href="/cSubEdit" title="редагування підвидів одиниць виміру">
+										підвиди підвидів ов
+									</a>
 								</li>
 								<li>
-									<a href="/insuranceReestr" title="редагування місця реєстрації">місце реєстрації</a>
+									<a href="/insuranceCommentEdit" title="перегляд коментарів калькуляторів">
+										коментарі калькулятора
+									</a>
 								</li>
 								<li>
-									<a href="/insuranceCommentEdit" title="перегляд коментарів калькуляторів">коментарі калькулятора</a>
+									<a href="/insuranceType" title="редагування типів ТЗ">
+										типи ТЗ
+									</a>
+								</li>
+								<li>
+									<a href="/insuranceReestr" title="редагування місця реєстрації">
+										місце реєстрації
+									</a>
+								</li>
+								<li>
+									<a href="/cEdit" title="редагування мір довжини">
+										редагування мір калькуляторів 
+									</a>
+								</li>
+							</ul>			
+						</div>
+
+
+						<div class="btn-group btn-group-justified">
+							<button type="button" data-toggle="dropdown" class="text-menu-admin btn btn-primary dropdown-toggle">калькулятри</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/insurance" title="калькулятор">калькулятор страхування</a>
 								</li>
 								<li>
 									<a href="/insurancePlugin" title="сторінка плагіна" target="_blank">плагін калькулятора</a>
@@ -109,9 +137,8 @@
 								</li>
 							</ul>			
 						</div>
-
 						<div class="btn-group btn-group-justified">
-							<button type="button" data-toggle="dropdown" class="text-menu btn btn-primary dropdown-toggle">роботи<span class="caret"></span></button>
+							<button type="button" data-toggle="dropdown" class="text-menu-admin btn btn-primary dropdown-toggle">роботи<span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li>
 									<a href="/faCreate/" title="додати фотоальбом">створення фотоальбомів</a>
@@ -128,7 +155,7 @@
 						</div>
 
 						<div class="btn-group btn-group-justified">
-							<button type="button" data-toggle="dropdown" class="text-menu btn btn-primary dropdown-toggle">службові<span class="caret"></span></button>
+							<button type="button" data-toggle="dropdown" class="text-menu-admin btn btn-primary dropdown-toggle">службові<span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li><a href="/delivery" title="редагування перевізників">перевізники</a></li>
 								<li><a href="/roles" title="редагування видів користувачів">види користувачів</a></li>
@@ -140,19 +167,19 @@
 								<li><a href="/spam" title="редагування спаму">спам</a></li>
 								<li><a href="dataChangePars" title="редагування parsing">редагування parsing</a></li>
 
-								<li><a href="parsFindHTMLRosa" title="parcing"><button type="button" class="text-menu btn btn-danger">parsРоса</button></a></li>
+								<li><a href="parsFindHTMLRosa" title="parcing"><button type="button" class="text-menu-admin btn btn-danger">parsРоса</button></a></li>
 								
-								<li><a href="/parsHTML" title="parcing"><button type="button" class="text-menu">parsHTML</button></a></li>
-								<li><a href="/parsHTML52" title="parcing"><button type="button" class="text-menu">parsHTML52</button></a></li>
-								<li><a href="/parsHTML53" title="parcing"><button type="button" class="text-menu">parsHTML53</button></a></li>
-								<li><a href="/parsForm" title="parcing"><button type="button" class="text-menu">parsForm</button></a></li>
-								<li><a href="/processlist" title="processlist"><button type="button" class="text-menu">PROCESSLIST</button></a></li>
+								<li><a href="/parsHTML" title="parcing"><button type="button" class="text-menu-admin">parsHTML</button></a></li>
+								<li><a href="/parsHTML52" title="parcing"><button type="button" class="text-menu-admin">parsHTML52</button></a></li>
+								<li><a href="/parsHTML53" title="parcing"><button type="button" class="text-menu-admin">parsHTML53</button></a></li>
+								<li><a href="/parsForm" title="parcing"><button type="button" class="text-menu-admin">parsForm</button></a></li>
+								<li><a href="/processlist" title="processlist"><button type="button" class="text-menu-admin">PROCESSLIST</button></a></li>
 
 							</ul>			
 						</div>
 
 						<div class="btn-group btn-group-justified">
-							<button type="button" data-toggle="dropdown" class="text-menu btn btn-primary dropdown-toggle">замовлення<span class="caret"></span></button>
+							<button type="button" data-toggle="dropdown" class="text-menu-admin btn btn-primary dropdown-toggle">замовлення<span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li><a href="/orders" title="замовлення">замовлення</a></li>
 								<li><a href="/ordersfind" title="замовлення">замовлення main</a></li>

@@ -6,16 +6,7 @@
 				<div class="row">
 					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-0"></div>
 					<div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
-						  <div class='reklPicture'>
-						    <a href='https://artargus.in.ua' target='_blank'>
-						      <img class="argusImg" src='/image/art.jpg' alt='товари для художників' title='все для художників' border='2'>
-						    </a><br><br>
-						    <img class="argusImg" src="/image/Logo_last.png">
-						  </div>
-						  <div>
-						  	<a href="/autosign" class="btn btn-primary btn-block">Авто номера</a>
-						  	<a href="/insurance" class="btn btn-primary btn-block">Калькулятор автоцивілки</a>
-						  </div>
+						<?php include 'views/insurance/insLeftSide.php';?>
 					</div>
 					<div class="col-lg-1 col-md-1 col-sm-0 col-xs-0"></div>
 					<div class='col-lg-4 col-md-4 col-sm-10 col-xs-12'>		
@@ -23,41 +14,73 @@
 							<h3 class="text-center var">КАЛЬКУЛЯТОР АВТОЦИВІЛКИ</h3>
 								<span>Тип транспортного засобу</span><br>
 								<select v-model="k1">
-									<option v-for="option in typeVechicle" v-bind:value="option.value">
+									<option v-for="option in options_k1" :value="optionK1()">
 										{{ option.type }} {{ option.name }}
 									</option>
-								</select><br><br>
+								</select><br>
 
 								<span>Місце реєстрації транспортного засобу</span><br>
 								<span>Населені пункти з населенням</span><br>
 								<select v-model="k2">
-									<option v-for="option in typeRegister" v-bind:value="option.value">
-										{{ option.name }}
-									</option>
-								</select><br><br>
-
-								<span>Пільги</span><br>
-								<select v-model="k6">
-									<option v-for="option in options_privilege" :value="option.value">
+									<option v-for="option in options_k2" :value="option.value">
 										{{ option.text }}
 									</option>
-								</select><br><br>
+								</select><br>
 
 								<span>Використання</span><br>
-								<select v-model="used">
-									<option v-for="option in options_used" :value="option.id">
+								<select v-model="k3">
+									<option v-for="option in options_k3" :value="option.value">
 										{{ option.text }}
 									</option>
-								</select><br><br>
+								</select><br>
+
+								<span>Власник ТЗ</span><br>
+								<select v-model="k4">
+									<option v-for="option in options_k4" :value="option.value">
+										{{ option.text }}
+									</option>
+								</select><br>
 
 								<span>Термін дії поліса</span><br>
 								<select v-model="k5">
-									<option v-for="option in options_TD" :value="option.value">
+									<option v-for="option in options_k5" :value="option.value">
 										{{ option.text }}
 									</option>
-								</select><br><br><br>
+								</select><br>
 
-							<div class="text-center var">Вартість {{ suma }} грн</div> 
+<!-- 								<span>Показники збитковості</span><br>
+
+								</select><br><br> -->
+
+								<span>Строк дії договору</span><br>
+								<select v-model="k7">
+									<option v-for="option in options_k7" :value="option.value">
+										{{ option.text }}
+									</option>
+								</select><br>
+
+								<span>Спосіб укладення договору</span><br>
+								<select v-model="k8">
+									<option v-for="option in options_k8" :value="option.value">
+										{{ option.text }}
+									</option>
+								</select><br>
+
+								<span>Пільги</span><br>
+								<select v-model="k9">
+									<option v-for="option in options_k9" :value="option.value">
+										{{ option.text }}
+									</option>
+								</select><br>
+
+								<span>Франшиза</span><br>
+								<select v-model="fr">
+									<option v-for="option in options_Fr" :value="option.value">
+										{{ option.text }}
+									</option>
+								</select><br><br>
+
+							<div class="text-center var">Вартість {{ suma }} грн</div>
 						</div>
 						<p class="dnister">Інформація надана</p>
 						<span style="font-weight:bold; font-size: 14px;" class="dnister">ПрАТ “АКЦІОНЕРНА СТРАХОВА КОМПАНІЯ “ДНІСТЕР”</span><br>
