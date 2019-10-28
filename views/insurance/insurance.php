@@ -12,69 +12,67 @@
 					<div class='col-lg-4 col-md-4 col-sm-10 col-xs-12'>		
 						<div class='auth'>
 							<h3 class="text-center var">КАЛЬКУЛЯТОР АВТОЦИВІЛКИ</h3>
-								<span>Тип транспортного засобу</span><br>
-								<select v-model="k1">
-									<option v-for="option in options_k1" :value="optionK1()">
+								<span class="colSpan">Тип транспортного засобу</span><br>
+								<select class="colSelect" v-model="k11">
+									<option v-for="option in options_k1" :value="option.value">
 										{{ option.type }} {{ option.name }}
 									</option>
 								</select><br>
 
-								<span>Місце реєстрації транспортного засобу</span><br>
-								<span>Населені пункти з населенням</span><br>
-								<select v-model="k2">
+								<span class="colSpan">Місце реєстрації транспортного засобу</span><br>
+								<span class="colSpan">Населені пункти з населенням</span><br>
+								<select class="colSelect" v-model="k22">
 									<option v-for="option in options_k2" :value="option.value">
 										{{ option.text }}
 									</option>
 								</select><br>
 
-								<span>Використання</span><br>
-								<select v-model="k3">
+								<span class="colSpan">Використання</span><br>
+								<select class="colSelect" v-model="k3">
 									<option v-for="option in options_k3" :value="option.value">
 										{{ option.text }}
 									</option>
 								</select><br>
 
-								<span>Власник ТЗ</span><br>
-								<select v-model="k4">
+								<span class="colSpan">Власник ТЗ</span><br>
+								<select class="colSelect" v-model="k44">
 									<option v-for="option in options_k4" :value="option.value">
 										{{ option.text }}
 									</option>
 								</select><br>
 
-								<span>Термін дії поліса</span><br>
-								<select v-model="k5">
+								<span class="colSpan">Термін дії поліса</span><br>
+								<select class="colSelect" v-model="k5">
 									<option v-for="option in options_k5" :value="option.value">
 										{{ option.text }}
 									</option>
 								</select><br>
 
-<!-- 								<span>Показники збитковості</span><br>
+								<!-- <span>Показники збитковості</span><br> -->
 
-								</select><br><br> -->
-
-								<span>Строк дії договору</span><br>
-								<select v-model="k7">
+								<span class="colSpan">Строк дії договору</span><br>
+								<select class="colSelect" v-model="k7">
 									<option v-for="option in options_k7" :value="option.value">
 										{{ option.text }}
 									</option>
 								</select><br>
 
-								<span>Спосіб укладення договору</span><br>
-								<select v-model="k8">
+								<span class="colSpan">Спосіб укладення договору</span><br>
+								<select class="colSelect" v-model="k8">
 									<option v-for="option in options_k8" :value="option.value">
 										{{ option.text }}
 									</option>
 								</select><br>
 
-								<span>Пільги</span><br>
-								<select v-model="k9">
+								<span class="colSpan">Пільги</span><br>
+								<select class="colSelect" v-model="k9">
 									<option v-for="option in options_k9" :value="option.value">
 										{{ option.text }}
 									</option>
 								</select><br>
 
-								<span>Франшиза</span><br>
-								<select v-model="fr">
+								<span class="colSpan">Франшиза</span><br>
+								<select class="colSelect" v-model="fr">
 									<option v-for="option in options_Fr" :value="option.value">
 										{{ option.text }}
 									</option>

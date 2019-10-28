@@ -13,10 +13,11 @@ class CalculatorController {
 
 	private function viewMeasures($tab,$h3,$meta) {
 		$type    = 4;
-		$subject = $massage = "перехід на ".$h3;		
+		$ip      = $_SERVER['REMOTE_ADDR'];
+		$subject = "перехід на ".$h3;
+		$massage = $subject." ip=".$ip."  з HTTP_REFERER ".$_SERVER['HTTP_REFERER']."\r\n"."  з REMOTE_ADDR ".$_SERVER['REMOTE_ADDR']."\r\n";		
 		$sendCl  = new SendMail(); 
-		$send    = $sendCl->sendMail($subject,"sl147@ukr.net",$massage);		
-		//$json    = self::json($tab);
+		$send    = $sendCl->sendMail($subject,"sl147@ukr.net",$massage);
 		$comment = Insurance::getComment($type);
 		if(isset($_POST['submit'])) {
 			$typeC   = new classGetData('typeCalculator');			
@@ -51,7 +52,7 @@ class CalculatorController {
 	}
 
 	public function actionLength() {
-		$res = self::viewMeasures("cLength","Калькулятор мір довжини",Auxiliary:: getMeta("Length"));
+		$res = self::viewMeasures("cLength","калькулятори інші",Auxiliary:: getMeta("Length"));
 		return true;	
 	}
 }

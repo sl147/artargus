@@ -48,16 +48,6 @@ class Calculator
 		return $result -> execute();		
 	}
 
-	public static function updateVueReestr ($id, $name, $k2) {
-		$db     = self::db();
-		$sql    = "UPDATE cLength SET name=:name, k=:k2 WHERE id=$id";
-		$result = $db -> prepare($sql);
-		$result -> bindParam(':name', $name, PDO::PARAM_STR);
-		$result -> bindParam(':k2',   $k2,   PDO::PARAM_STR);
-		
-		return $result -> execute();		
-	}
-
 	public static function addVueReestrTab ($name, $k, $type) {
 		$db     = self::db();
 		$sql    = "INSERT INTO calculator (name,k,type) VALUES(:name,:k,:type)";
@@ -75,16 +65,6 @@ class Calculator
 		$result = $db -> prepare($sql);
 		$result -> bindParam(':name', $name, PDO::PARAM_STR);
 		$result -> bindParam(':type', $type, PDO::PARAM_STR);
-		
-		return $result -> execute();;			
-	}
-
-	public static function addVueReestr ($name, $k2) {
-		$db     = self::db();
-		$sql    = "INSERT INTO cLength (name,k) VALUES(:name,:k2)";
-		$result = $db -> prepare($sql);
-		$result -> bindParam(':name', $name, PDO::PARAM_STR);
-		$result -> bindParam(':k2',   $k2,   PDO::PARAM_STR);
 		
 		return $result -> execute();;			
 	}
@@ -116,14 +96,12 @@ class Calculator
 
 	public static function selectSub($type) {
 		$db  = self::db();
-		$list = [];
 		$sql = "SELECT * FROM typeSubCalculator WHERE idCalculator=".intval($type);
 		$res = $db -> query($sql);
 		while ($row = $res->fetch()) {			
 			$list[] = $row;
 		}
-		//return (isset($list)) ? $list : [];
-		return $list;
+		return (isset($list)) ? $list : [];
 	}
 }
 ?>

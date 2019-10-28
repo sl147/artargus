@@ -10,6 +10,14 @@ select {
   font-size: 14px;
  }
 
+.colSpan {
+  color: blue;
+}
+
+.colSelect {
+  color: red;
+}
+
 .argusImg {
   width: 100%;
  height: auto;

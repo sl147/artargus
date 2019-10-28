@@ -2,10 +2,13 @@
 	var vue_ins = new Vue({
 		el: '#sljarInsurance',
 		data: {
-			k1: [],
-			k2: [],
+			k11: [],
+			k1:1,
+			k22: [],
+			k2: 1.5,
 			k3: 1,
-			k4: [],
+			k44: [],
+			k4:1.55,
 			k5: 1,
 			k6: 1,
 			k7: 1,
@@ -92,29 +95,40 @@
 		},
 		computed: {
 			suma: function(){
-				s = this.base * this.k1[this.fr-1] * this.k2[this.fr-1] * this.k3 * this.k4[this.fr-1] * this.k5 * this.k6 * this.k7 * this.k8 * this.k9
+				s = this.base * this.k1 * this.k2 * this.k3 * this.k4 * this.k5 * this.k6 * this.k7 * this.k8 * this.k9
 				return (isNaN(s)) ? (0).toFixed(2) : (s).toFixed(2)
 			}			
 		},
-/*		watch: {
+		watch: {
+			k11: function() {
+				console.log('k1='+this.k11[this.fr-1])
+				this.k1 = this.k11[this.fr-1]
+			},
+			k22: function() {
+				console.log('k2='+this.k22[this.fr-1])
+				this.k2 = this.k22[this.fr-1]
+			},
+			k44: function() {
+				console.log('k4='+this.k44[this.fr-1])
+				this.k4 = this.k44[this.fr-1]
+			},
 			fr: function() {
-				console.log('k1='+this.k1[this.fr-1])
-				console.log('k2='+this.k2[this.fr-1])
-				console.log('k3='+this.k3)
-				console.log('k4='+this.k4[this.fr-1])
-				console.log('k5='+this.k5)
-				console.log('k6='+this.k6)
-				console.log('k7='+this.k7)
-				console.log('k8='+this.k8)
-				console.log('k9='+this.k9)
-
+				console.log('k1='+this.k11[this.fr-1])
+				console.log('k2='+this.k22[this.fr-1])
+				console.log('k4='+this.k44[this.fr-1])
+				this.k1 = this.k11[this.fr-1]
+				this.k2 = this.k22[this.fr-1]
+				this.k4 = this.k44[this.fr-1]
 			}
-		},*/	
+		},	
 		methods: {
-			optionK1: function() {
+			optionK1: function(o) {
+				//this.k1=o.value[this.fr-1]
+				console.log('o='+o.name)
 				console.log('fr='+this.fr)
-				console.log('k1='+this.k1[this.fr-1])
-				return this.k1[this.fr-1]
+				//console.log('k1='+this.k1[this.fr-1])
+				console.log('k1='+o.value[this.fr-1])
+				//return this.k1[this.fr-1]
 			}	
 /*			getTZ: function() {
 				this.$http.get(this.select).then(function (response) {
@@ -125,7 +139,7 @@
 			},*/
 		},
 		created: function() {
-			this.k1 = [1,2,3]
+			//this.k1 = [1,2,3]
 		}
 })
 })( jQuery )
