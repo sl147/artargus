@@ -1,12 +1,3 @@
-<!-- <div>
-	<a href="/autosign" class="btn btn-primary btn-block">
-		Авто номера
-	</a>
-	<a href="/insurance" class="btn btn-primary btn-block">
-		Калькулятор автоцивілки
-	</a>	
-</div> -->
-
 <div class='reklPicture'>
 <a href='https://artargus.in.ua' target='_blank'>
   <img class="argusImg" src='/image/art.jpg' alt='товари для художників' title='все для художників' border='2'>

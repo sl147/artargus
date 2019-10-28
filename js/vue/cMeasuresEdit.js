@@ -78,8 +78,8 @@ var vue_app = new Vue({
 				}
 			}
 		},	
-		getSub: function(t) {
-			this.$http.get(this.selectSub+t).then(function (response) {
+		getSub: function() {
+			this.$http.get(this.selectSub+this.type).then(function (response) {
 				this.subs = JSON.parse(response.data)
 				for (let n of this.subs) {
 					console.log('id='+n.id+'  '+n.name)
@@ -96,15 +96,13 @@ var vue_app = new Vue({
 				this.elements=[]
 				this.nameType = this.getNameType(this.typeCalc)
 				this.type = this.typeCalc
-				this.getSub(this.typeCalc)
-				this.getAll(this.typeCalc)
+				this.getSub()
+				this.getAll()
 				this.showEdit = true
 			}
 		}
 	},
 	created: function() {
-/*		let get  = window.data
-		this.type = get["type"]	*/	
 		this.getTypes()
 	}	
   })

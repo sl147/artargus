@@ -26,7 +26,6 @@ select {
  .authCalc
  {
    background-color: #F5FFFA;
-
    padding: 10px;
    margin: 58px auto;
    opacity:0.85;
@@ -36,7 +35,7 @@ select {
  .authCalc label
  {
   display: block;
-  width:200px
+  width:200px;
   float: left;
  }
  
@@ -59,6 +58,11 @@ select {
   width: 99%;
   padding-left: 5px;
  }
+
+.mSelect {
+margin-left:25px;
+border-style:none;
+}
 
 .reklPicture {
   margin-top: 36%;

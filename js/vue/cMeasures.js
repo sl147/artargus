@@ -102,8 +102,10 @@ $(document).ready(function() {
 			second: function(){
 				this.saveQuantity()
 			},
-			quantity: function(){
-				this.quantity = (this.quantity>0) ? this.quantity : 1
+			quantity: function(val, oldVal){
+				//console.log('новое значение: %s, старое значение: %s', val, oldVal)
+				this.quantity = (this.quantity > 0) ? this.quantity : 1
+				this.quantity = (val.length > 20) ? oldVal : val
 				let m = (this.quantity.length * 10)+50
 				m = (m > 500) ? 500 : m
 				this.l = 'width: '+m+'px;border-style:none;padding-left:10px;margin-left:40px;'

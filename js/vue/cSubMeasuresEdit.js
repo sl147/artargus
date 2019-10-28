@@ -23,7 +23,7 @@ var vue_app = new Vue({
 		add2el: function () {
 			let req = this.add+this.newname+"&type="+this.type
 			this.$http.get(req).then(function (response){     
-				this.getAll(this.type)
+				this.getAll()
 				this.show = !this.show
 				this.newname = ""
 			},function (error){
@@ -61,8 +61,8 @@ var vue_app = new Vue({
 				console.log(error)
 			})
 		},			
-		getAll: function(t) {
-			this.$http.get(this.select+t).then(function (response) {
+		getAll: function() {
+			this.$http.get(this.select+this.type).then(function (response) {
 				this.elements = JSON.parse(response.data)			
 			},function (error){
 				console.log(error)
@@ -73,10 +73,9 @@ var vue_app = new Vue({
 		typeCalc: function() {
 			console.log('type='+this.typeCalc)
 			if(this.typeCalc>0) {
-				this.elements=[]
-				
+				this.elements=[]				
 				this.type = this.typeCalc
-				this.getAll(this.typeCalc)
+				this.getAll()
 				this.showEdit = true
 			}
 		}

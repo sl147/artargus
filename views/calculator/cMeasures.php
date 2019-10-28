@@ -8,9 +8,7 @@
 					<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 						<?php include 'views/calculator/leftSide.php';?>
 					</div>
-					<div class='authCalc col-lg-6 col-md-6 col-sm-10 col-xs-12'>		
-
-						<!-- <h3 class="text-center var"><?=$h3 ?></h3> -->
+					<div class='authCalc col-lg-6 col-md-6 col-sm-10 col-xs-12'>
 						<label>Виберіть тип калькулятора</label>
 						<select v-model="typeCalc">
 							<option v-for="type in types" :value="type.id">
@@ -18,43 +16,22 @@
 							</option>
 						</select><br><br><br>
 						<div v-if="show">
-<!-- 							<div class='auth'>
-								<input style="width: 150px;" type="number" v-model="quantity">
-								<select v-model="first">
-									<option v-for="var1 in elements" v-bind:value="var1">
-										{{ var1.name }} 
-									</option>
-								</select>
-								<br><br><br>
-								<span v-if="result">має {{ result }}</span>
-								<select v-model="second">
-									<option v-for="var2 in elements" v-bind:value="var2.k">
-										{{ var2.name }}
-									</option>							
-								</select><br><br>
-							</div> -->
 							Перевести 
-								<select v-model="first" class="btn btn-primary" style="margin-left:25px;border-style:none;">
+								<select v-model="first" class="mSelect btn btn-primary">
 									<option v-for="var1 in elements" :value="var1">
 										{{ var1.name }} 
 									</option>
 								</select>
-								<span style="margin-left:40px;">в</span> 
-								<select v-model="second" class="btn btn-primary" style="margin-left:40px;border-style:none;">
+								<span class="mSelect">в</span> 
+								<select v-model="second" class="mSelect btn btn-primary">
 									<option v-for="var2 in elements" :value="var2">
 										{{ var2.name }}
 									</option>							
-								</select><br><br>							
-<!-- 							<input :style="l" type="number" v-model="quantity">
-							<span> {{first.name}} має {{ result }} {{second.name}}</span>
-							<div v-for="type in typesActive">
-								{{ type.name }}: {{resActive(type)}}
-							</div> -->
+								</select><br><br>
 							кількість:<input class="btn btn-primary" :style="l" type="number" v-model="quantity"/><br><br>
 							<table class="table table-responsive table-bordered table-striped table-hover">
 								<thead>
 									<tr class='success'>
-										<!-- <th class="text-center">кількість</th> -->
 										<th class="text-center">од. виміру</th>
 										<th class="text-center">містить</th>
 										<th class="text-center">од. виміру</th>
@@ -62,9 +39,6 @@
 								</thead>
 								<tbody>
 									<tr>
-										<!-- <td class="text-center">
-											<input :style="l" type="number" v-model="quantity"/>
-										</td> -->
 										<td class="text-center">{{first.name}}</td>
 										<td class="text-right" style="width: 200px;">{{ result }}</td>
 										<td class="text-center">{{second.name}}</td>
@@ -117,7 +91,4 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/vue.min.js"></script>
 <script src="/js/vue-resource.min.js"></script>	
-<script>
-window.data=<?= $json ?>;
-</script>
 <script src="/js/vue/cMeasures.js"></script>	

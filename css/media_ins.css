@@ -30,7 +30,13 @@
 }
 
 @media only screen and (max-width : 600px) {
-
+.authCalc {
+	padding-top: 0px;
+}
+ .authCalc div
+ {
+  margin-bottom: 0px;
+ }
 
 }
 
